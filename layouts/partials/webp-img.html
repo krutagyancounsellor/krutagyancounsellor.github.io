@@ -1,0 +1,17 @@
+{{ $src := .src }} {{ $alt := .alt | default "Image" }} {{ $img := resources.Get
+$src }} {{ if $img }} {{ $webp := $img.Process "webp q80" }}
+<picture>
+  <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+  <img
+    src="{{ $img.RelPermalink }}"
+    alt="{{ $alt }}"
+    width="{{ $img.Width }}"
+    height="{{ $img.Height }}"
+    loading="lazy"
+    class="img-fluid rounded shadow-lg"
+    style="max-height: 500px; width: 100%; object-fit: cover"
+  />
+</picture>
+{{ else }}
+<p style="color: red">Image not found: {{ $src }}</p>
+{{ end }}

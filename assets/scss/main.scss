@@ -1,7 +1,75 @@
-// 1. Custom color variables
-$primary: #5a32a8;
-$secondary: #ffc107;
-$body-bg: #f8f9fa;
+// Pallette 1 : Calm Green
+// $body-bg: #f7faf7;
+// $body-color: #2f3e34;
 
-// 2. Import Bootstrap
+// $primary: #7aa874;
+// $secondary: #a3c9a8;
+// $success: #6fae7a;
+// $info: #8bbbd9;
+// $warning: #e6c28b;
+// $danger: #d97a7a;
+// $light: #eef5ee;
+// $dark: #2f3e34;
+
+// $border-color: #dbe7dc;
+// $card-bg: #ffffff;
+// $card-border-color: #dbe7dc;
+
+// Palette 2 - Soft Blue
+// $body-bg: #f4f8fb;
+// $body-color: #2c3e50;
+
+// $primary: #6baed6;
+// $secondary: #9ecae1;
+// $success: #7bc8a4;
+// $info: #6baed6;
+// $warning: #f0c674;
+// $danger: #e57373;
+// $light: #e9f1f7;
+// $dark: #2c3e50;
+
+// $border-color: #d6e4ef;
+// $card-bg: #ffffff;
+// $card-border-color: #d6e4ef;
+
+// Palette 3 - Warm Neurtral
+// $body-bg: #fdfaf6;
+// $body-color: #3e3a36;
+
+// $primary: #c8a27a;
+// $secondary: #e6c9a8;
+// $success: #a3b18a;
+// $info: #a8c7d6;
+// $warning: #e6b566;
+// $danger: #d88c8c;
+// $light: #f6efe7;
+// $dark: #3e3a36;
+
+// $border-color: #eadfd3;
+// $card-bg: #ffffff;
+// $card-border-color: #eadfd3;
+
+// Palette 4 - Minimal Zen
+$body-bg: #ffffff;
+$body-color: #222222;
+
+$primary: #8fb9a8;
+$secondary: #cfe3db;
+$success: #9bcfae;
+$info: #a8c7d6;
+$warning: #e6c28b;
+$danger: #d98c8c;
+$light: #f5f5f5;
+$dark: #222222;
+
+$border-color: #e0e0e0;
+$card-bg: #ffffff;
+$card-border-color: #e0e0e0;
+
+$btn-color: #ffffff;
+$btn-border-radius: 0.6rem;
+
+$link-color: $primary;
+$link-hover-color: darken($primary, 10%);
+
 @import "node_modules/bootstrap/scss/bootstrap";

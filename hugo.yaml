@@ -3,3 +3,29 @@ languageCode: en-us
 title: Krutagyan Counsellor
 params:
   description: Therapy for Healing
+
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules
+      target: assets/node_modules
+
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "Blog"
+      url: "/blog/"
+      weight: 2
+    - name: "FAQ"
+      url: "/faq/"
+      weight: 3
+  footer:
+    - name: "Terms & Conditions"
+      url: "/legal/terms-and-conditions/"
+      weight: 1
+    - name: "Privacy Policy"
+      url: "/legal/privacy-policy/"
+      weight: 2

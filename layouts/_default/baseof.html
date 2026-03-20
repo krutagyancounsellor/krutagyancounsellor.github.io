@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint
+    }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+  </head>
+
+  <body>
+    {{ partial "header.html" . }}
+
+    <main class="container-fluid">{{ block "main" . }}{{ end }}</main>
+
+    {{ partial "footer.html" . }} {{ $js := resources.Get
+    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" | fingerprint }}
+    <script
+      src="{{ $js.RelPermalink }}"
+      integrity="{{ $js.Data.Integrity }}"
+    ></script>
+  </body>
+</html>

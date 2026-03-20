@@ -1,0 +1,15 @@
+<footer class="bg-dark text-white">
+  <div class="container py-2">
+    <div class="row">
+      <div class="col-md-6">
+        <p>© {{ now.Year }} {{ .Site.Title }}</p>
+      </div>
+
+      <div class="col-md-6 text-md-end">
+        {{ range .Site.Menus.footer }}
+        <a class="text-white me-3" href="{{ .URL }}"> {{ .Name }} </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</footer>
