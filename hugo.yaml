@@ -1,0 +1,5 @@
+baseURL: https://krutagyancounsellor.github.io/
+languageCode: en-us
+title: Krutagyan Counsellor
+params:
+  description: Therapy for Healing
