@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="container py-5">
+    <h1 class="display-4 mb-4">{{ .Title }}</h1>
+    <div class="row">
+        {{ range .Paginator.Pages }}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {{ with .Params.image }}
+                <img src="{{ . | relURL }}" class="card-img-top" alt="{{ $.Title }}">
+                {{ end }}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ .Title }}</h5>
+                    <p class="card-text text-muted">{{ .Summary | truncate 150 }}</p>
+                    <a href="{{ .Permalink }}" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <div class="mt-4">
+        {{ template "_internal/pagination.html" . }}
+    </div>
+</div>
+{{ end }}

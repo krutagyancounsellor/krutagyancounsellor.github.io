@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+<h1 class="mb-5">Resources & Articles</h1>
+{{ $paginator := .Paginate (where .Pages "Type" "blog") }} {{ range
+$paginator.Pages }}
+
+<article class="mb-5 border-bottom pb-4">
+  <div class="row">
+    <div class="col-md-4">
+      {{ if .Params.image }} {{ partial "webp-img.html" (dict "src"
+      (.Params.image | relURL) "alt" .Params.imageTitle ) }} {{ end }}
+    </div>
+
+    <div class="col-md-8">
+      <h2>
+        <a href="{{ .RelPermalink }}"> {{ .Title }} </a>
+      </h2>
+
+      <p class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</p>
+
+      <p>{{ .Summary }}</p>
+
+      <a class="btn btn-outline-primary btn-sm" href="{{ .RelPermalink }}">
+        Read More
+      </a>
+    </div>
+  </div>
+</article>
+
+{{ end }}
+
+<div class="d-flex justify-content-between mb-3">
+  {{ if $paginator.HasPrev }}
+  <a class="btn btn-outline-secondary" href="{{ $paginator.Prev.URL }}">
+    ← Newer Posts
+  </a>
+  {{ end }} {{ if $paginator.HasNext }}
+  <a class="btn btn-outline-secondary ms-auto" href="{{ $paginator.Next.URL }}">
+    Older Posts →
+  </a>
+  {{ end }}
+</div>
+
+{{ end }}

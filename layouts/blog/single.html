@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<article class="container">
+  <h1 class="mb-3">{{ .Title }}</h1>
+
+  <p>
+    <span class="text-muted">{{ .Date.Format "Jan 2, 2006" }} </span>
+    <span>
+      Tags: {{ range .Params.tags }}
+      <a class="badge bg-secondary me-1" href="/tags/{{ . | urlize }}">
+        {{ . }}
+      </a>
+      {{ end }}
+    </span>
+  </p>
+
+  {{ if .Params.image }} {{ partial "webp-img.html" (dict "src" (.Params.image
+  | relURL) "alt" .Params.imageTitle ) }} {{ end }}
+
+  <div class="my-4">{{ .Content }}</div>
+</article>
+
+{{ end }}
