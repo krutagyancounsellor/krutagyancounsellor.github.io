@@ -9,4 +9,4 @@ If you're considering a consultation, you might have a few questions. Here are t
 
 ---
 
-Still have a question? {{< contactlink title="Contact for a discovery call">}}.
+Still have a question? {{< contact-link >}}
