@@ -1,10 +1,88 @@
 baseURL: https://krutagyancounsellor.github.io/
-languageCode: en-us
+# NOTE: `languageCode` is deprecated in Hugo 0.158+ in favour of `locale`, but
+# the GitHub Actions workflow pins Hugo 0.157.0 where `locale` does not yet
+# exist. This key works in both (0.157: silent, 0.161: deprecation warning).
+languageCode: en-in
+defaultContentLanguage: en
 title: Krutagyan Counsellor
+enableRobotsTXT: true
+
+# ---------------------------------------------------------------------------
+# Site-wide parameters. These are the single source of truth for every
+# contact detail, social profile and SEO default used across the templates.
+# ---------------------------------------------------------------------------
 params:
-  description: Therapy for Healing
+  description: >-
+    Reflective, person-centred online counselling with Madhuchhanda Padhy.
+    A confidential space to understand yourself, your experiences and the
+    influences that shape you. Non-clinical, non-crisis support — book a
+    free initial consultation.
+  author: Madhuchhanda
+  authorFullName: Madhuchhanda Padhy
+  email: krutagyancounsellor@gmail.com
+  phone: "+91 96328 71524"
+  # Digits only (no spaces, dashes or "+") — required by the wa.me API.
+  whatsapp: "919632871524"
+  whatsappText: "Hi, I'd like to book a counselling session."
+  twitter: "@krutagyanc"
+  # Shown in the homepage <title> — keyword-rich, under ~60 characters.
+  homeTitle: "Person-Centred Online Counselling | Reflection & Clarity"
+  bookingURL: https://wa.me/919632871524?text=Hi%2C%20I%27d%20like%20to%20book%20a%20counselling%20session.
+
+  # -------------------------------------------------------------------------
+  # LIMITED-TIME OFFER — removable in one step.
+  # Set `enabled: false` (or delete this whole block) to remove every offer
+  # line/sentence from the homepage and revert all booking buttons to
+  # `ctaLabelOff`. Nothing else needs to change.
+  # -------------------------------------------------------------------------
+  offer:
+    enabled: true
+    # Button text: while the offer is live vs once it has been removed.
+    ctaLabel: "Book Your Free Initial Consultation"
+    ctaLabelOff: "Book a Consultation"
+    # Short line shown under the hero button.
+    heroNote: "Complimentary 30-minute initial consultation · Available until 31 January 2027"
+    # Step 01 of "How Counselling Works".
+    stepSubtitle: "A first conversation, without the initial fee."
+    stepSubtitleOff: "A first conversation to see whether we're a good fit."
+    stepNote: "I'm offering a complimentary 30-minute initial consultation until 31 January 2027."
+    # Line shown under the closing CTA button.
+    finalNote: "Available until 31 January 2027. Advance booking required; appointments subject to availability."
+
+  socials:
+    - name: Instagram
+      icon: bi-instagram
+      url: https://www.instagram.com/krutagyancounsellor/
+    - name: Facebook
+      icon: bi-facebook
+      url: https://www.facebook.com/krutagyancounsellor
+    - name: LinkedIn
+      icon: bi-linkedin
+      url: https://www.linkedin.com/in/madhuchhanda-padhy-61944a320
+    - name: Twitter
+      icon: bi-twitter-x
+      url: https://x.com/krutagyanc
+
 pagination:
   pagerSize: 2
+
+permalinks:
+  # `:contentbasename` keeps the short, stable URLs derived from each Markdown
+  # file name (e.g. /blog/anxiety-grounding/). Using `:slug` would instead
+  # derive the URL from the page *title*, producing very long URLs.
+  blog: /blog/:contentbasename/
+
+taxonomies:
+  tag: tags
+  category: categories
+
+sitemap:
+  changefreq: weekly
+  filename: sitemap.xml
+  priority: 0.5
+
+minify:
+  minifyOutput: true
 
 module:
   mounts:
@@ -21,9 +99,6 @@ menu:
     - name: "Blog"
       url: "/blog/"
       weight: 2
-    - name: "FAQ"
-      url: "/faq/"
-      weight: 3
   footer:
     - name: "Terms & Conditions"
       url: "/terms-and-conditions/"
@@ -31,3 +106,5 @@ menu:
     - name: "Privacy Policy"
       url: "/privacy-policy/"
       weight: 2
+
+

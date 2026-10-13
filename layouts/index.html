@@ -1,82 +1,18 @@
+{{- /*
+  Homepage orchestrator.
+  Each section lives in its own partial under layouts/partials/home/ so the
+  page reads top-to-bottom and sections stay independently editable.
+*/ -}}
 {{ define "main" }}
 
-<section class="hero-section container-fluid py-5">
-  <div class="row align-items-center">
-    <div class="col-lg-6 text-center text-lg-start">
-      <h2 class="display-4 fw-bold mb-3">
-        Helping individuals find clarity, balance, and emotional well-being.
-      </h2>
-      <p class="lead text-muted mb-4">
-        Navigate life's challenges with evidence-based strategies and
-        compassionate support. Accessible from anywhere in the world.
-      </p>
-      <div
-        class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-lg-start"
-      >
-        <a
-          class="btn btn-primary btn-lg px-4 me-sm-3"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfGtC8TIl2amr5EKZwdjtoASEfRW-rpvpXSo2sbqFZJTNWIqg/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Book a Discovery Call</a
-        >
-
-        <a href="/blog" class="btn btn-secondary btn-lg px-4 me-sm-3"
-          >Read the Blog</a
-        >
-      </div>
-    </div>
-    <div class="col-lg-6 d-none d-lg-block">
-      {{ partial "webp-img.html" (dict "src" "/images/consultant.jpg" "alt"
-      "Consultant Profile") }}
-    </div>
-  </div>
-</section>
-
-<section class="how-it-works bg-white">
-  <div class="container-fluid py-5">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold">How It Works</h2>
-      <p class="text-muted">
-        A simple, personalized process to get you started.
-      </p>
-    </div>
-
-    <div class="row text-center g-4">
-      <div class="col-md-4">
-        <div class="step-icon mb-3 mx-auto shadow-sm">
-          <i class="bi bi-telephone-plus fs-2 text-primary"></i>
-        </div>
-        <h4 class="fw-bold">1. Introductory Call</h4>
-        <p class="text-muted px-lg-4">
-          Contact me to schedule a brief call. We’ll discuss your goals and find
-          a time slot that works for your schedule.
-        </p>
-      </div>
-
-      <div class="col-md-4">
-        <div class="step-icon mb-3 mx-auto shadow-sm">
-          <i class="bi bi-envelope-check fs-2 text-primary"></i>
-        </div>
-        <h4 class="fw-bold">2. Confirmation Email</h4>
-        <p class="text-muted px-lg-4">
-          After our call, I will send a detailed email with your booking
-          confirmation, payment info, and session details.
-        </p>
-      </div>
-
-      <div class="col-md-4">
-        <div class="step-icon mb-3 mx-auto shadow-sm">
-          <i class="bi bi-laptop fs-2 text-primary"></i>
-        </div>
-        <h4 class="fw-bold">3. Join via Teams</h4>
-        <p class="text-muted px-lg-4">
-          Once payment is received, you'll get your secure link. Simply click to
-          join our private Microsoft Teams meeting.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{{ partial "home/hero.html" . }}
+{{ partial "home/intro.html" . }}
+{{ partial "home/meet-counsellor.html" . }}
+{{ partial "home/approach.html" . }}
+{{ partial "home/how-it-works.html" . }}
+{{ partial "home/home-faq.html" . }}
+{{ partial "home/closing-cta.html" . }}
 
 {{ end }}
+
+

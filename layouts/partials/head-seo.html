@@ -1,0 +1,92 @@
+{{- /*
+  Meta description, Open Graph, Twitter Card and canonical URL tags.
+  Every value falls back to a site-wide default from `hugo.yaml` params so no
+  page is ever published without a description.
+*/ -}}
+
+{{- $page := . -}}
+{{- $desc := "" -}}
+{{- if $page.Params.description -}}
+  {{- $desc = $page.Params.description -}}
+{{- else if $page.IsHome -}}
+  {{- $desc = $page.Site.Params.description -}}
+{{- else if $page.Summary -}}
+  {{- $desc = $page.Summary | plainify | htmlUnescape | truncate 155 -}}
+{{- else -}}
+  {{- $desc = $page.Site.Params.description -}}
+{{- end -}}
+
+{{- /* Page titles: the homepage uses the bare brand name, other pages use
+       "Title | Brand". Keep the whole thing under ~60 chars where possible. */ -}}
+{{- $title := "" -}}
+{{- if $page.IsHome -}}
+  {{- $tagline := $page.Site.Params.homeTitle | default "" -}}
+  {{- $title = printf "%s%s" $page.Site.Title (cond (ne $tagline "") (printf " | %s" $tagline) "") -}}
+{{- else -}}
+  {{- $title = printf "%s | %s" $page.Title $page.Site.Title -}}
+{{- end -}}
+
+{{- /* Social share image: the page's own image if it has one, otherwise the
+       site logo. Must be an absolute URL for crawlers to fetch it. */ -}}
+{{- $imgResource := "" -}}
+{{- with $page.Params.image -}}
+  {{- $imgResource = resources.Get . -}}
+{{- end -}}
+{{- if not $imgResource -}}
+  {{- $imgResource = resources.Get "images/consultant.jpg" -}}
+{{- end -}}
+{{- $imgURL := "" -}}
+{{- with $imgResource -}}
+  {{- $imgURL = printf "%s%s" $page.Site.BaseURL (strings.TrimPrefix "/" .RelPermalink) -}}
+{{- end -}}
+
+{{- $canonical := $page.Permalink -}}
+
+<meta name="description" content="{{ $desc }}" />
+<title>{{ $title }}</title>
+<link rel="canonical" href="{{ $canonical }}" />
+
+{{- /* --- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage) --- */ -}}
+<meta property="og:site_name" content="{{ $page.Site.Title }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:url" content="{{ $canonical }}" />
+<meta property="og:type" content="{{ if $page.IsHome }}website{{ else }}article{{ end }}" />
+<meta property="og:locale" content="en_IN" />
+{{ with $imgURL }}
+<meta property="og:image" content="{{ . }}" />
+<meta property="og:image:alt" content="{{ $page.Site.Title }}" />
+{{ end }}
+{{ if not $page.IsHome }}
+<meta property="article:published_time" content="{{ $page.Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="article:author" content="{{ $page.Site.Params.authorFullName }}" />
+{{ with $page.Params.tags }}
+  {{ range . }}
+<meta property="article:tag" content="{{ . }}" />
+  {{ end }}
+{{ end }}
+{{ end }}
+
+{{- /* --- Twitter / X card --- */ -}}
+<meta name="twitter:card" content="{{ if $imgURL }}summary_large_image{{ else }}summary{{ end }}" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $desc }}" />
+{{ with $imgURL }}
+<meta name="twitter:image" content="{{ . }}" />
+{{ end }}
+{{ with $page.Site.Params.twitter }}
+<meta name="twitter:site" content="{{ . }}" />
+{{ end }}
+
+{{- /* --- Pagination: prev/next rel links for crawlable series --- */ -}}
+{{- $isListKinds := slice "home" "section" "taxonomy" "term" -}}
+{{- if in $isListKinds $page.Kind -}}
+  {{- with $page.Paginator -}}
+    {{- if .HasPrev -}}
+<link rel="prev" href="{{ .Prev.URL | absURL }}" />
+    {{- end -}}
+    {{- if .HasNext -}}
+<link rel="next" href="{{ .Next.URL | absURL }}" />
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

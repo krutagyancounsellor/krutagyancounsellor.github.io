@@ -1,0 +1,121 @@
+{{- /*
+  JSON-LD structured data.
+
+  - `Person` / `LocalBusiness` graph on every page, carrying the email,
+    phone, WhatsApp URL and `sameAs` social profiles. `sameAs` is how search
+    engines tie the website to its social profiles.
+  - `Article` schema on blog posts.
+  - `FAQPage` schema on the homepage, auto-generated from data/home-faq.yml.
+  - `BreadcrumbList` schema on nested pages.
+*/ -}}
+
+{{- $author := .Site.Params.authorFullName -}}
+{{- $socialURLs := slice -}}
+{{- range .Site.Params.socials -}}
+  {{- $socialURLs = $socialURLs | append .url -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{{- $person := dict
+    "@type" (slice "Person" "LocalBusiness")
+    "@id" (printf "%s#business" .Site.BaseURL)
+    "name" $author
+    "url" .Site.BaseURL
+    "email" .Site.Params.email
+    "telephone" .Site.Params.phone
+    "description" .Site.Params.description
+    "sameAs" $socialURLs
+    "contactPoint" (dict
+      "@type" "ContactPoint"
+      "contactType" "customer support"
+      "email" .Site.Params.email
+      "telephone" .Site.Params.phone
+      "availableLanguage" (slice "en" "hi")
+    )
+    "potentialAction" (dict
+      "@type" "CommunicateAction"
+      "name" "Book a counselling session on WhatsApp"
+      "target" .Site.Params.bookingURL
+    )
+-}}
+{{- dict "@context" "https://schema.org" "@graph" (slice $person) | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS -}}
+</script>
+
+{{- /* ---------- Article schema for blog posts ---------- */ -}}
+{{- if and (eq .Kind "page") (eq .Section "blog") -}}
+  {{- $desc := .Params.description | default (.Summary | plainify | htmlUnescape | truncate 155) -}}
+  {{- $imgURL := "" -}}
+  {{- with .Params.image -}}
+    {{- with resources.Get . -}}
+      {{- $imgURL = printf "%s%s" $.Site.BaseURL (strings.TrimPrefix "/" .RelPermalink) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $article := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "@id" .Permalink
+      "headline" .Title
+      "description" $desc
+      "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "author" (dict "@type" "Person" "name" $author "url" .Site.BaseURL)
+      "publisher" (dict "@type" "Organization" "name" .Site.Title "url" .Site.BaseURL)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+      "inLanguage" "en-IN"
+      "keywords" (delimit .Params.tags ", ")
+      "articleSection" "Mental Health & Counselling"
+  -}}
+  {{- if $imgURL -}}
+    {{- $article = merge $article (dict "image" $imgURL) -}}
+  {{- end -}}
+<script type="application/ld+json">
+{{ $article | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS }}
+</script>
+{{- end -}}
+
+{{- /* ---------- FAQPage schema ----------
+  Built from data/home-faq.yml — the same YAML that drives the visible
+  accordion in the homepage "A few things you may be wondering" section, so
+  the visible content and the structured data can never drift apart.
+  Emitted on the homepage only.
+*/ -}}
+{{- if .IsHome -}}
+  {{- $questions := slice -}}
+  {{- range index hugo.Data "home-faq" -}}
+    {{- $questions = $questions | append (dict
+        "@type" "Question"
+        "name" .question
+        "acceptedAnswer" (dict
+          "@type" "Answer"
+          "text" (.answer | markdownify | plainify | htmlUnescape | strings.TrimSpace)
+        )
+      ) -}}
+  {{- end -}}
+  {{- if $questions -}}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $questions | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS -}}
+</script>
+  {{- end -}}
+{{- end -}}
+
+{{- /* ---------- BreadcrumbList schema ---------- */ -}}
+{{- if not .IsHome -}}
+  {{- $crumbs := slice (dict
+      "@type" "ListItem"
+      "position" 1
+      "name" "Home"
+      "item" .Site.BaseURL
+  ) -}}
+  {{- $pos := 2 -}}
+  {{- if .Section -}}
+    {{- $parent := .Parent -}}
+    {{- if and $parent (ne $parent .Site.Home) -}}
+      {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" $parent.Title "item" $parent.Permalink) -}}
+      {{- $pos = add $pos 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) -}}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS -}}
+</script>
+{{- end -}}

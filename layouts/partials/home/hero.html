@@ -1,0 +1,39 @@
+{{- /* Section 1 — Hero */ -}}
+{{- $offer := .Site.Params.offer -}}
+
+<section class="hero-section container-fluid py-5">
+  <div class="row align-items-center g-5">
+    <div class="col-lg-6 text-center text-lg-start">
+      <h1 class="display-5 fw-bold mb-3">
+        You don't have to figure everything out on your own.
+      </h1>
+      <p class="lead text-muted mb-3">
+        A space to understand yourself, your experiences, and the influences
+        that shape you.
+      </p>
+      <p class="mb-4">
+        Sometimes, the difficult part isn't knowing what to do. It's
+        understanding why something feels difficult in the first place.
+      </p>
+
+      <div
+        class="d-grid gap-2 d-sm-flex justify-content-sm-center justify-content-lg-start"
+      >
+        {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+      </div>
+
+      {{- /* Offer note — removed automatically when the offer is turned off. */ -}}
+      {{ with $offer }}{{ if .enabled }}
+      <p class="text-muted small mt-3 mb-0">
+        <i class="bi bi-gift me-1" aria-hidden="true"></i>
+        {{ .heroNote }}
+      </p>
+      {{ end }}{{ end }}
+    </div>
+
+    <div class="col-lg-6 d-none d-lg-block">
+      {{ partial "webp-img.html" (dict "src" "/images/consultant.jpg" "alt"
+      "Krutagyan Counsellor — Madhuchhanda Padhy") }}
+    </div>
+  </div>
+</section>

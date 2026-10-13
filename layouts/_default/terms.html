@@ -1,17 +1,21 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
+<div class="container py-4">
+  {{ partial "breadcrumbs.html" . }}
 
-<ul>
-  {{ range .Data.Terms }}
+  <h1 class="mb-4">{{ .Title }}</h1>
 
-  <li>
-    <a href="{{ .Page.RelPermalink }}"> {{ .Page.Title }} </a>
+  <ul class="list-unstyled">
+    {{ range .Data.Terms }}
 
-    ({{ .Count }})
-  </li>
+    <li class="mb-2">
+      <a href="{{ .Page.RelPermalink }}"> {{ .Page.Title }} </a>
 
-  {{ end }}
-</ul>
+      <span class="text-muted">({{ .Count }})</span>
+    </li>
+
+    {{ end }}
+  </ul>
+</div>
 
 {{ end }}

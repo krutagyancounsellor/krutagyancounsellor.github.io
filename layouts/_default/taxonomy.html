@@ -1,17 +1,23 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
+<div class="container py-4">
+  {{ partial "breadcrumbs.html" . }}
 
-{{ range .Pages }}
+  <h1 class="mb-4">Articles tagged "{{ .Title }}"</h1>
 
-<article class="mb-4">
-  <h2>
-    <a href="{{ .RelPermalink }}"> {{ .Title }} </a>
-  </h2>
+  {{ range .Pages }}
 
-  <p class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</p>
+  <article class="mb-4">
+    <h2>
+      <a href="{{ .RelPermalink }}"> {{ .Title }} </a>
+    </h2>
 
-  <p>{{ .Summary }}</p>
-</article>
+    <p class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</p>
 
-{{ end }} {{ end }}
+    <p>{{ .Summary }}</p>
+  </article>
+
+  {{ end }}
+</div>
+
+{{ end }}

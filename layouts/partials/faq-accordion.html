@@ -1,0 +1,39 @@
+{{- /*
+  Reusable accessible accordion, driven by a data file.
+
+  Params:
+    id      DOM id prefix for the accordion (required for unique collapse ids)
+    source  Data file name under data/ (e.g. "faq" or "home-faq")
+
+  Used by both the `faq` shortcode and the homepage FAQ section.
+*/ -}}
+{{ $faqID := .id | default "faqAccordion" }}
+{{ $source := .source | default "faq" }}
+{{ $items := index hugo.Data $source }}
+
+<div class="accordion" id="{{ $faqID }}">
+  {{ range $index, $element := $items }}
+  <div class="accordion-item mb-3">
+    <h2 class="accordion-header" id="heading-{{ $faqID }}-{{ $index }}">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse-{{ $faqID }}-{{ $index }}"
+        aria-expanded="false"
+        aria-controls="collapse-{{ $faqID }}-{{ $index }}"
+      >
+        {{ $element.question }}
+      </button>
+    </h2>
+    <div
+      id="collapse-{{ $faqID }}-{{ $index }}"
+      class="accordion-collapse collapse"
+      aria-labelledby="heading-{{ $faqID }}-{{ $index }}"
+      data-bs-parent="#{{ $faqID }}"
+    >
+      <div class="accordion-body">{{ $element.answer | markdownify }}</div>
+    </div>
+  </div>
+  {{ end }}
+</div>

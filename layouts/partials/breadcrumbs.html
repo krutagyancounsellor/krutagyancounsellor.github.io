@@ -1,0 +1,49 @@
+{{- /*
+  Visible breadcrumb trail.
+
+  Renders a Bootstrap breadcrumb that mirrors the BreadcrumbList JSON-LD in
+  structured-data.html, so the trail visitors see and the trail crawlers read
+  stay in sync. The current page is the last, non-linked crumb.
+
+  Handles section pages, taxonomy term pages (e.g. /tags/anxiety/) and the
+  taxonomy index (e.g. /tags/). Not used on the homepage.
+*/ -}}
+
+{{- if not .IsHome -}}
+  {{- $crumbs := slice (dict "Title" "Home" "RelPermalink" "/") -}}
+
+  {{- if eq .Kind "term" -}}
+    {{- /* e.g. Home > Tags > Anxiety */ -}}
+    {{- with .Parent -}}
+      {{- if ne . .Site.Home -}}
+        {{- $crumbs = $crumbs | append (dict "Title" .Title "RelPermalink" .RelPermalink) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if eq .Kind "taxonomy" -}}
+    {{- /* Home is already present; this page is the last crumb. */ -}}
+  {{- else if .Section -}}
+    {{- /* Nested section pages, if any are added later. */ -}}
+    {{- $parent := .Parent -}}
+    {{- if and $parent (ne $parent .Site.Home) -}}
+      {{- $crumbs = $crumbs | append (dict "Title" $parent.Title "RelPermalink" $parent.RelPermalink) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $crumbs = $crumbs | append (dict "Title" .Title "RelPermalink" "") -}}
+
+  <nav aria-label="Breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0">
+      {{- range $i, $c := $crumbs -}}
+        {{- if or (eq $i 0) $c.RelPermalink -}}
+      <li class="breadcrumb-item">
+        <a href="{{ $c.RelPermalink }}">{{ $c.Title }}</a>
+      </li>
+        {{- else -}}
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ $c.Title }}
+      </li>
+        {{- end -}}
+      {{- end -}}
+    </ol>
+  </nav>
+{{- end -}}

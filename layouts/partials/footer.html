@@ -1,15 +1,100 @@
+{{- /* Reusable bits ------------------------------------------------- */ -}}
+{{- $waText := .Site.Params.whatsappText | urlquery -}}
+{{- $waURL := printf "https://wa.me/%s?text=%s" .Site.Params.whatsapp $waText -}}
+
 <footer class="bg-dark text-white">
-  <div class="container py-2">
-    <div class="row">
-      <div class="col-md-6">
-        <p>© {{ now.Year }} {{ .Site.Title }}</p>
+  {{- /* ---- Contact strip: email, phone, WhatsApp booking CTA ---- */ -}}
+  <div class="container py-4 border-bottom border-secondary">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-8">
+        <h2 class="h5 text-white mb-2">Get in touch</h2>
+        <ul class="list-unstyled mb-0 d-flex flex-column flex-sm-row gap-sm-4 small">
+          <li>
+            <i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>
+            <a
+              class="link-light"
+              href="mailto:{{ .Site.Params.email }}"
+              aria-label="Email us at {{ .Site.Params.email }}"
+            >
+              {{ .Site.Params.email }}
+            </a>
+          </li>
+          <li>
+            <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>
+            <a
+              class="link-light"
+              href="tel:{{ .Site.Params.whatsapp }}"
+              aria-label="Call us on {{ .Site.Params.phone }}"
+            >
+              {{ .Site.Params.phone }}
+            </a>
+          </li>
+          <li>
+            <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+            <span class="text-white-50">Available on WhatsApp</span>
+          </li>
+        </ul>
       </div>
 
-      <div class="col-md-6 text-md-end">
-        {{ range .Site.Menus.footer }}
-        <a class="text-white me-3" href="{{ .URL }}"> {{ .Name }} </a>
-        {{ end }}
+      <div class="col-lg-4 text-lg-end">
+        <a
+          class="btn btn-success btn-lg"
+          href="{{ $waURL }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Book a counselling session on WhatsApp"
+        >
+          <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+          Book a Discovery Call
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {{- /* ---- Social profiles + legal links ---- */ -}}
+  <div class="container py-3">
+    <div class="row align-items-center g-3">
+      <div class="col-md-4">
+        <p class="mb-0 small">
+          © {{ now.Year }} {{ .Site.Title }}. All rights reserved.
+        </p>
+      </div>
+
+      <div class="col-md-5 text-center">
+        <ul
+          class="list-unstyled mb-0 d-flex flex-wrap justify-content-center gap-3 small"
+        >
+          {{ range .Site.Menus.footer }}
+          <li>
+            <a class="link-light text-decoration-none" href="{{ .URL | relURL }}">
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <ul
+          class="list-unstyled mb-0 d-flex justify-content-center justify-content-md-end gap-3"
+        >
+          {{ range .Site.Params.socials }}
+          <li>
+            <a
+              class="link-light fs-5"
+              href="{{ .url }}"
+              target="_blank"
+              rel="me noopener noreferrer"
+              aria-label="{{ .name }} — opens in a new tab"
+              title="{{ .name }}"
+            >
+              <i class="bi {{ .icon }}" aria-hidden="true"></i>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
       </div>
     </div>
   </div>
 </footer>
+

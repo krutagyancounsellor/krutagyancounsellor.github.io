@@ -2,8 +2,10 @@
 date: '2026-03-07T15:23:15+05:30'
 draft: false
 title: 'Finding Your Anchor: A Practical Guide to Managing Anxiety'
+description: 'A practical guide to managing anxiety — learn to soften resistance, use the 5-4-3-2-1 grounding technique and slow your breath to calm your nervous system.'
+author: 'Madhuchhanda'
 image: '/images/blog/anxiety-grounding.jpg'
-imageTitle: 'Anciety Grounding'
+imageTitle: 'Anxiety Grounding'
 tags: ['Anxiety', 'Wellness']
 ---
 

@@ -1,0 +1,13 @@
+# Questions shown in the homepage "A few things you may be wondering" section.
+# Kept separate from faq.yml (the /faq/ page) so the two never repeat content.
+- question: "Do I need to know what I want to discuss?"
+  answer: "No. You can begin with a concern, a question, a recurring experience, or a sense that something needs attention. You do not need to arrive with a complete explanation."
+
+- question: "What happens during the initial consultation?"
+  answer: "We discuss what has led you to consider counselling, your questions about my approach, and whether the service may be suitable for your needs. It is an introductory conversation, not a counselling session."
+
+- question: "Am I expected to continue after the consultation?"
+  answer: "No. The consultation is an opportunity to make an informed decision. You can decide whether you wish to proceed after understanding the approach and practical arrangements."
+
+- question: "Is this service suitable for everyone?"
+  answer: "My current service is intended for individuals seeking reflective, non-clinical, non-crisis-based counselling support. It is not a substitute for clinical mental health treatment or emergency support. If your needs fall outside the scope of this service, we can discuss whether another service may be more appropriate."

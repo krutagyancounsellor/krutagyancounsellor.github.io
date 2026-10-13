@@ -1,5 +1,7 @@
 {{ define "main" }}
 <div class="container py-5">
+    {{ partial "breadcrumbs.html" . }}
+
     <h1 class="display-4 mb-4">{{ .Title }}</h1>
     <div class="row">
         {{ range .Paginator.Pages }}

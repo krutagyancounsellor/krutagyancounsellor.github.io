@@ -33,38 +33,31 @@
 // $card-border-color: #d6e4ef;
 
 // Palette 3 - Warm Neurtral
-// $body-bg: #fdfaf6;
-// $body-color: #3e3a36;
+$body-bg: #fdfaf6;
+$body-color: #3e3a36;
 
-// $primary: #c8a27a;
-// $secondary: #e6c9a8;
-// $success: #a3b18a;
-// $info: #a8c7d6;
-// $warning: #e6b566;
-// $danger: #d88c8c;
-// $light: #f6efe7;
-// $dark: #3e3a36;
-
-// $border-color: #eadfd3;
-// $card-bg: #ffffff;
-// $card-border-color: #eadfd3;
-
-// Palette 4 - Minimal Zen
-$body-bg: #ffffff;
-$body-color: #222222;
-
-$primary: #8fb9a8;
-$secondary: #cfe3db;
-$success: #9bcfae;
+// ACCESSIBILITY (WCAG 2.1 AA):
+// The original brand tan (#c8a27a) gave white-on-tan buttons only 2.36:1
+// contrast, well below the 4.5:1 minimum for normal text. `$primary` is
+// therefore the *darkened* tan (#80694d), which measures:
+//   white on $primary ........ 5.19:1   PASS
+//   $primary on $body-bg ..... 4.99:1   PASS (body links)
+//   $primary on $light ....... 4.55:1   PASS (links inside light sections)
+// The original lighter tan is kept as `$primary-light` for decorative,
+// non-text uses only (borders, dividers, icon tinting).
+$primary: #80694d;
+$primary-light: #c8a27a;
+$secondary: #e6c9a8;
+$success: #a3b18a;
 $info: #a8c7d6;
-$warning: #e6c28b;
-$danger: #d98c8c;
-$light: #f5f5f5;
-$dark: #222222;
+$warning: #e6b566;
+$danger: #d88c8c;
+$light: #f6efe7;
+$dark: #3e3a36;
 
-$border-color: #e0e0e0;
+$border-color: #eadfd3;
 $card-bg: #ffffff;
-$card-border-color: #e0e0e0;
+$card-border-color: #eadfd3;
 
 $btn-color: #ffffff;
 $btn-border-radius: 0.6rem;
@@ -73,3 +66,48 @@ $link-color: $primary;
 $link-hover-color: darken($primary, 10%);
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// --- Homepage sections ----------------------------------------------------
+// Constrained measure for long-form prose so lines stay readable.
+.prose-narrow {
+  p {
+    line-height: 1.75;
+    margin-bottom: 1.1rem;
+  }
+}
+
+// Large muted number above each "How Counselling Works" step.
+.step-number {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+// Slight lift on the numbered steps to read as cards.
+.how-it-works .col-md-6,
+.how-it-works .col-lg-3 {
+  > div {
+    background: var(--bs-body-bg);
+    border-radius: $btn-border-radius;
+  }
+}
+
+// --- Accessibility -------------------------------------------------------
+// "Skip to content" link — visible only when focused via keyboard.
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1030;
+
+  &:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: $body-bg;
+    color: $body-color;
+    border: 2px solid $primary;
+    border-radius: $btn-border-radius;
+  }
+}
+
+

@@ -1,0 +1,110 @@
+{{- /*
+  Section 5 — How Counselling Works (4 steps).
+  Step 01's subtitle and opening sentence are offer-gated.
+*/ -}}
+{{- $offer := .Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+
+<section class="how-it-works bg-light py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">How Counselling Works</h2>
+      <p class="text-muted mb-0">
+        A collaborative process that starts with your experience.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {{- /* Step 01 */ -}}
+      <div class="col-md-6 col-lg-3">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">01</p>
+          <h3 class="h5 fw-bold">Start with a conversation</h3>
+          <p class="fw-semibold mb-2">
+            {{- if $on }}{{ $offer.stepSubtitle }}{{ else }}{{ $offer.stepSubtitleOff }}{{ end -}}
+          </p>
+          {{ if $on }}
+          <p class="text-muted">{{ $offer.stepNote }}</p>
+          {{ end }}
+          <p class="text-muted">
+            This is an opportunity to share, in broad terms, what has brought
+            you here, understand how I work, and ask questions about the
+            counselling process. It also allows us to consider whether my
+            approach and the scope of my service align with your needs.
+          </p>
+          <p class="text-muted mb-0">
+            This is an introductory consultation, not a counselling session. It
+            does not include therapeutic exploration or treatment, and there is
+            no obligation to continue afterwards.
+          </p>
+        </div>
+      </div>
+
+      {{- /* Step 02 */ -}}
+      <div class="col-md-6 col-lg-3">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">02</p>
+          <h3 class="h5 fw-bold">If you choose to proceed</h3>
+          <p class="text-muted">
+            If we decide that working together may be appropriate, we can
+            discuss the practical arrangements and how counselling would begin.
+          </p>
+          <p class="text-muted mb-0">
+            The counselling process itself starts in a separate session. You
+            can bring the concerns, questions, or experiences that feel
+            important to you, even if they are not yet clearly defined.
+          </p>
+        </div>
+      </div>
+
+      {{- /* Step 03 */ -}}
+      <div class="col-md-6 col-lg-3">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">03</p>
+          <h3 class="h5 fw-bold">Explore your experience in context</h3>
+          <p class="text-muted">
+            Our experiences do not exist in isolation. Relationships, family
+            dynamics, cultural expectations, social environments, and personal
+            beliefs can all influence how we understand ourselves and respond
+            to the world.
+          </p>
+          <p class="text-muted">
+            My approach is person-centred and integrative, informed by CBT,
+            REBT, Gestalt approaches, and Transactional Analysis.
+          </p>
+          <p class="text-muted mb-0">
+            Depending on what is relevant to your experience, we may explore
+            beliefs, emotional responses, relational patterns, or different
+            ways of interpreting a situation. The process is guided by your
+            needs and perspective rather than a predetermined formula.
+          </p>
+        </div>
+      </div>
+
+      {{- /* Step 04 */ -}}
+      <div class="col-md-6 col-lg-3">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">04</p>
+          <h3 class="h5 fw-bold">Make room for new perspectives</h3>
+          <p class="text-muted">
+            Understanding does not always mean finding an immediate answer.
+            Sometimes, it begins with recognising an assumption, noticing a
+            familiar pattern, or seeing a situation from a perspective you had
+            not previously considered.
+          </p>
+          <p class="text-muted">
+            The work is collaborative. Your experiences, values, and choices
+            remain central as we explore what feels meaningful and relevant to
+            you.
+          </p>
+          <p class="text-muted mb-0">
+            The aim is not to tell you how to live or who you should become,
+            but to support a more considered understanding of your experiences
+            and the possibilities available to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

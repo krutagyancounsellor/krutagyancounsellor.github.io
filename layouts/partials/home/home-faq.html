@@ -1,0 +1,14 @@
+{{- /* Section 6 — Home FAQ: "A few things you may be wondering" */ -}}
+
+<section class="home-faq bg-white py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 prose-narrow">
+        <h2 class="h3 fw-bold mb-4">A few things you may be wondering</h2>
+
+        {{- /* Distinct data source from the /faq/ page so content never repeats. */ -}}
+        {{ partial "faq-accordion.html" (dict "id" "homeFaq" "source" "home-faq") }}
+      </div>
+    </div>
+  </div>
+</section>

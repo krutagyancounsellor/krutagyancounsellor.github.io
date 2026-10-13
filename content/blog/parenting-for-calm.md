@@ -2,6 +2,8 @@
 date: '2026-03-20T15:23:15+05:30'
 draft: false
 title: 'Parenting from Calm: Why Co-Regulation is Your Most Powerful Tool'
+description: 'Children borrow calm from a regulated adult. Learn what co-regulation is, why it works, and practical ways to parent from calm instead of reacting.'
+author: 'Madhuchhanda'
 image: '/images/blog/parenting-co-regulation.jpg'
 imageTitle: 'Parenting Co-Regulation'
 tags: ['Parenting', 'Wellness']

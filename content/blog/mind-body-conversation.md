@@ -2,6 +2,8 @@
 date: '2026-03-14T15:23:15+05:30'
 draft: false
 title: 'The Mind-Body Conversation: Understanding the Physical Language of Emotion'
+description: 'Emotions speak through the body. Understand the physical language of anxiety, grief and stress, and learn body-based ways to feel safe again.'
+author: 'Madhuchhanda'
 image: '/images/blog/mind-body-conversation.jpg'
 imageTitle: 'Mind-Body Conversation'
 tags: ['Emotions', 'Mental Health']

@@ -2,6 +2,7 @@
 date: '2026-03-20T15:21:03+05:30'
 draft: false
 title: 'Privacy Policy & Data Protection Agreement'
+description: 'How Krutagyan Counsellor collects, uses, stores and protects your personal and health information, and the rights you have over your data.'
 ---
 
 **Last Updated:** 2026-03-20

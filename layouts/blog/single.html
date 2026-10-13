@@ -1,10 +1,13 @@
 {{ define "main" }}
 
-<article class="container">
+<article class="container py-4">
+  {{ partial "breadcrumbs.html" . }}
+
   <h1 class="mb-3">{{ .Title }}</h1>
 
-  <p>
-    <span class="text-muted">{{ .Date.Format "Jan 2, 2006" }} </span>
+  <p class="text-muted">
+    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+    <span>· {{ .Site.Params.author }}</span>
     <span>
       Tags: {{ range .Params.tags }}
       <a class="badge bg-secondary me-1" href="/tags/{{ . | urlize }}">
@@ -18,6 +21,20 @@
   | relURL) "alt" .Params.imageTitle ) }} {{ end }}
 
   <div class="my-4">{{ .Content }}</div>
+
+  <hr class="my-5" />
+
+  <p class="text-muted">
+    Ready to talk this through?
+    <a
+      href="{{ .Site.Params.bookingURL }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Book a Discovery Call on WhatsApp"
+      >Book a Discovery Call</a
+    >.
+  </p>
 </article>
 
 {{ end }}
+

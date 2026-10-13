@@ -1,23 +1,57 @@
 <!doctype html>
-<html>
+{{- /*
+  `.Site.LanguageCode` is used rather than the newer `.Site.Language.Locale`
+  because the GitHub Actions workflow pins Hugo 0.157.0, where `Locale` does
+  not exist yet. This key resolves correctly in both 0.157 and 0.161+.
+*/ -}}
+<html lang="{{ .Site.LanguageCode | default "en" }}">
   <head>
     <meta charset="utf-8" />
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {{- /* SEO: description, canonical, Open Graph, Twitter Card, prev/next */ -}}
+    {{ partial "head-seo.html" . }}
+
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint
-    }}
+
+    {{- /* Feed auto-discovery */ -}}
+    {{ with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
+    {{ end }}
+
+    {{- /*
+      Bootstrap Icons.
+      The upstream CSS points at "./fonts/..." relative to its own folder.
+      The font files themselves live in static/fonts/, so the url() paths are
+      rewritten to the site root before minifying. A literal string replace is
+      used deliberately to avoid regex-escaping surprises in the template.
+    */ -}}
+    {{ $iconsRaw := resources.Get "node_modules/bootstrap-icons/font/bootstrap-icons.css" }}
+    {{ $iconsFixed := strings.Replace $iconsRaw.Content "./fonts/" "/fonts/" }}
+    {{ $icons := $iconsFixed | resources.FromString "css/bootstrap-icons.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $icons.RelPermalink }}" />
+
+    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+
+    {{- /* JSON-LD structured data */ -}}
+    {{ partial "structured-data.html" . }}
   </head>
 
   <body>
+    <a class="visually-hidden-focusable skip-link" href="#main-content">
+      Skip to main content
+    </a>
+
     {{ partial "header.html" . }}
 
-    <main class="container-fluid">{{ block "main" . }}{{ end }}</main>
+    <main class="container-fluid" id="main-content">
+      {{ block "main" . }}{{ end }}
+    </main>
 
     {{ partial "footer.html" . }} {{ $js := resources.Get
     "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" | fingerprint }}

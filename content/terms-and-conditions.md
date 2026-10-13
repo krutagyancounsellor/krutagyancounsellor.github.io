@@ -2,6 +2,7 @@
 date: '2026-03-20T15:21:12+05:30'
 draft: false
 title: 'Terms and Conditions of Service'
+description: 'The terms and conditions governing counselling sessions with Krutagyan Counsellor — scope of practice, payments, cancellations, confidentiality limits and crisis protocol.'
 ---
 **Last Updated:** 2026-03-20
 
@@ -11,7 +12,9 @@ By accessing this website and booking a consultation with the Consultant, you ag
 
 ### 2. Nature of Service
 
-* **Consultation, Not Emergency Care:** The services provided are psychological consultations aimed at personal development and mental well-being. **This is not an emergency or crisis intervention service.** * **Crisis Protocol:** If you are experiencing a mental health emergency or contemplating self-harm, please contact your local emergency hotline (e.g., 112 in India, 911 in the USA, or 999 in the UK) or visit the nearest hospital emergency room.
+* **Consultation, Not Emergency Care:** The services provided are psychological consultations aimed at personal development and mental well-being. **This is not an emergency or crisis intervention service.**
+
+* **Crisis Protocol:** If you are experiencing a mental health emergency or contemplating self-harm, please contact your local emergency hotline (e.g., 112 in India, 911 in the USA, or 999 in the UK) or visit the nearest hospital emergency room.
 
 ### 3. Online Consultation Requirements (Microsoft Teams)
 

@@ -1,0 +1,32 @@
+{{- /* Section 7 — Closing CTA */ -}}
+{{- $offer := .Site.Params.offer -}}
+
+<section class="home-closing-cta bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-7">
+        <h2 class="fw-bold mb-3">Begin with a conversation.</h2>
+        <p class="text-muted">
+          You don't have to wait until things feel unbearable to seek support.
+          You also don't have to know exactly what you need before asking
+          questions.
+        </p>
+        <p class="text-muted mb-4">
+          A first conversation can help you understand the process and decide
+          whether it is right for you.
+        </p>
+
+        <div
+          class="d-grid gap-2 d-sm-flex justify-content-sm-center"
+        >
+          {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+        </div>
+
+        {{- /* Offer note — removed automatically when the offer is turned off. */ -}}
+        {{ with $offer }}{{ if .enabled }}
+        <p class="text-muted small mt-3 mb-0">{{ .finalNote }}</p>
+        {{ end }}{{ end }}
+      </div>
+    </div>
+  </div>
+</section>

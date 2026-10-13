@@ -1,0 +1,45 @@
+{{- /*
+  Shared booking button. Used by every homepage call-to-action so the label
+  is defined in exactly one place and the limited-time offer can be removed
+  in a single step.
+
+  Usage:
+    {{ partial "booking-cta.html" . }}                              → primary button
+    {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+
+  Params (all optional):
+    context  Page context (required — supplies .Site.Params)
+    size     "lg" | "" (default "") — button size
+    class    Extra CSS classes appended to the button
+    label    Override the button text entirely (ignores the offer label)
+*/ -}}
+
+{{- $ctx := .context | default . -}}
+{{- $offer := $ctx.Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+
+{{- $label := $offer.ctaLabelOff | default "Book a Consultation" -}}
+{{- if $on -}}{{- $label = $offer.ctaLabel | default $label -}}{{- end -}}
+{{- with .label -}}{{- $label = . -}}{{- end -}}
+
+{{- /*
+  `params.bookingURL` is the single source of truth. It is assembled here only
+  as a fallback, so templates never need to hand-build a wa.me link.
+*/ -}}
+{{- $waURL := $ctx.Site.Params.bookingURL -}}
+{{- if not $waURL -}}
+  {{- $waURL = printf "https://wa.me/%s?text=%s" $ctx.Site.Params.whatsapp ($ctx.Site.Params.whatsappText | urlquery) -}}
+{{- end -}}
+{{- $size := cond (eq .size "lg") "btn-lg" "" -}}
+
+<a
+  class="btn btn-primary {{ $size }} px-4 {{ .class }}"
+  href="{{ $waURL }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="{{ $label }} — opens WhatsApp in a new tab"
+>
+  <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+  {{ $label }}
+</a>

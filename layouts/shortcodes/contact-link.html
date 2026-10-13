@@ -1,6 +1,21 @@
+{{- /*
+  Booking call-to-action. Accepts an optional `text` argument:
+      {{< contact-link >}}                → "Book a Discovery Call"
+      {{< contact-link "Get in touch" >}} → "Get in touch"
+
+  Opens WhatsApp directly (no third-party form). Add `class` to restyle.
+*/ -}}
+
+{{- $label := .Get 0 | default "Book a Discovery Call" -}}
+{{- $waText := .Site.Params.whatsappText | urlquery -}}
+{{- $waURL := printf "https://wa.me/%s?text=%s" .Site.Params.whatsapp $waText -}}
+
 <a
-  href="https://docs.google.com/forms/d/e/1FAIpQLSfGtC8TIl2amr5EKZwdjtoASEfRW-rpvpXSo2sbqFZJTNWIqg/viewform"
+  class="fw-bold text-decoration-underline"
+  href="{{ $waURL }}"
   target="_blank"
   rel="noopener noreferrer"
-  >Book a Discovery Call</a
+  aria-label="{{ $label }} — opens WhatsApp in a new tab"
+  >{{ $label }}</a
 >
+
