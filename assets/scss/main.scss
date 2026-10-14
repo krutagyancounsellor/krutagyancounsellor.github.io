@@ -62,6 +62,36 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+// --- Sticky header -------------------------------------------------------
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030; // matches Bootstrap skip-link / dropdown z-index
+}
+
+// --- Header "Book a Consultation" button ----------------------------------
+.header-book-btn {
+  @extend .btn-primary;
+  border-radius: 50rem; // fully rounded pill
+  border: 2px solid $primary;
+  box-shadow: 0 2px 6px rgba($primary, 0.35);
+
+  .bi {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background: darken($primary, 8%);
+    border-color: darken($primary, 8%);
+  }
+
+  // Keep the pill compact on small viewports
+  @media (max-width: 575.98px) {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
 // --- Accessibility -------------------------------------------------------
 // "Skip to content" link — visible only when focused via keyboard.
 .skip-link {

@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-lg navbar-light bg-light"
+  class="navbar navbar-expand-lg navbar-light bg-light sticky-header"
   aria-label="Main navigation"
 >
   <div class="container">
@@ -25,13 +25,25 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav ms-auto">
         {{ range .Site.Menus.main }}
-
         <li class="nav-item">
           <a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a>
         </li>
-
         {{ end }}
       </ul>
+    </div>
+
+    <!-- Booking CTA: "Book a Consultation" pill button -->
+    <div class="mt-2 mt-lg-0">
+      <a
+        class="btn header-book-btn rounded-pill"
+        href="{{ .Site.Params.bookingURL }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Book a free initial consultation — opens WhatsApp in a new tab"
+      >
+        <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+        Book a Consultation
+      </a>
     </div>
   </div>
 </nav>
