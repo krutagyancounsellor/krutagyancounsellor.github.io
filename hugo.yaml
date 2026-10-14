@@ -38,10 +38,10 @@ params:
   offer:
     enabled: true
     # Button text: while the offer is live vs once it has been removed.
-    ctaLabel: "Book Your Free Initial Consultation"
-    ctaLabelOff: "Book a Consultation"
+    ctaLabel: "Request a free Consultation"
+    ctaLabelOff: "Request a Consultation"
     # Short line shown under the hero button.
-    heroNote: "Complimentary 30-minute initial consultation · Available until 31 January 2027"
+    heroNote: "Complimentary 30-minute free consultation · Available until 31 January 2027"
     # Step 01 of "How Counselling Works".
     stepSubtitle: "A first conversation, without the initial fee."
     stepSubtitleOff: "A first conversation to see whether we're a good fit."

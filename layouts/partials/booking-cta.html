@@ -19,7 +19,7 @@
 {{- $on := false -}}
 {{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
 
-{{- $label := $offer.ctaLabelOff | default "Book a Consultation" -}}
+{{- $label := $offer.ctaLabelOff | default "Request a Consultation" -}}
 {{- if $on -}}{{- $label = $offer.ctaLabel | default $label -}}{{- end -}}
 {{- with .label -}}{{- $label = . -}}{{- end -}}
 
