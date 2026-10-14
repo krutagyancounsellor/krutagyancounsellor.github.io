@@ -65,7 +65,7 @@ $btn-border-radius: 0.6rem;
 $link-color: $primary;
 $link-hover-color: darken($primary, 10%);
 
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 // --- Homepage sections ----------------------------------------------------
 // Constrained measure for long-form prose so lines stay readable.

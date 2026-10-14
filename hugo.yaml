@@ -1,8 +1,8 @@
 baseURL: https://krutagyancounsellor.github.io/
-# NOTE: `languageCode` is deprecated in Hugo 0.158+ in favour of `locale`, but
-# the GitHub Actions workflow pins Hugo 0.157.0 where `locale` does not yet
-# exist. This key works in both (0.157: silent, 0.161: deprecation warning).
-languageCode: en-in
+# RFC 5646 language tag. Used by `language.Translate`, date/currency/number
+# localisation, and by the templates for `<html lang>`, the RSS `<language>`
+# element and `og:locale`. Requires Hugo 0.158+ (replaced `languageCode`).
+locale: en-in
 defaultContentLanguage: en
 title: Krutagyan Counsellor
 enableRobotsTXT: true
