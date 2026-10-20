@@ -1,5 +1,5 @@
 ---
-date: '2026-03-07T15:23:15+05:30'
+date: '2026-09-26T09:30:00+05:30'
 draft: false
 title: 'Finding Your Anchor: A Practical Guide to Managing Anxiety'
 description: 'A practical guide to managing anxiety — learn to soften resistance, use the 5-4-3-2-1 grounding technique and slow your breath to calm your nervous system.'

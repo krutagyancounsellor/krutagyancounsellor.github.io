@@ -41,6 +41,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          # `enableGitInfo` (see hugo.yaml) resolves each page's `lastmod`
+          # from the git author date of its last revision. The default
+          # shallow clone (depth 1) carries no author dates, so the full
+          # history is required for the sitemap to report real update dates.
+          fetch-depth: 0
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

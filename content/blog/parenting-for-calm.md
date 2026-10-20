@@ -1,5 +1,5 @@
 ---
-date: '2026-03-20T15:23:15+05:30'
+date: '2026-10-10T09:30:00+05:30'
 draft: false
 title: 'Parenting from Calm: Why Co-Regulation is Your Most Powerful Tool'
 description: 'Children borrow calm from a regulated adult. Learn what co-regulation is, why it works, and practical ways to parent from calm instead of reacting.'

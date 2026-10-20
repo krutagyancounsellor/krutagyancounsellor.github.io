@@ -1,5 +1,5 @@
 ---
-date: '2026-03-14T15:23:15+05:30'
+date: '2026-10-03T09:30:00+05:30'
 draft: false
 title: 'The Mind-Body Conversation: Understanding the Physical Language of Emotion'
 description: 'Emotions speak through the body. Understand the physical language of anxiety, grief and stress, and learn body-based ways to feel safe again.'

@@ -21,6 +21,40 @@ title: Krutagyan Counsellor
 enableRobotsTXT: true
 
 # ---------------------------------------------------------------------------
+# Git integration.
+#
+# `enableGitInfo` makes Hugo read the git author date of each file's last
+# revision. Combined with the `frontmatter.lastmod` list below, every page
+# that has no explicit `lastmod:` in its front matter gets a *real* "last
+# updated" timestamp taken from the commit that last touched it — instead of
+# the hard-coded scaffold dates that previously appeared on every URL in
+# sitemap.xml.
+#
+# `timeZone` makes undated / date-only values resolve to +05:30 (IST) so the
+# sitemap, RSS and JSON-LD timestamps are consistent with the site's locale.
+#
+# NOTE: this requires the *full* git history to be available at build time.
+# The GitHub Actions workflow therefore checks out with `fetch-depth: 0`.
+# If history is missing, Hugo silently falls back to the `date` field.
+# ---------------------------------------------------------------------------
+enableGitInfo: true
+timeZone: Asia/Kolkata
+
+frontmatter:
+  # `lastmod` is listed first so an explicit `lastmod:` in a content file
+  # always wins (used for the legal pages, whose review date is meaningful
+  # and must not drift to an unrelated commit date). Everything else falls
+  # back to the git author date.
+  lastmod:
+    - lastmod
+    - :git
+    - modified
+    - date
+    - publishdate
+    - pubdate
+    - published
+
+# ---------------------------------------------------------------------------
 # Site-wide parameters. These are the single source of truth for every
 # contact detail, social profile and SEO default used across the templates.
 # ---------------------------------------------------------------------------
