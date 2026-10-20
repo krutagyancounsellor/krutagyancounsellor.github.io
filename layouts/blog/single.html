@@ -1,40 +1,88 @@
 {{ define "main" }}
 
 <article class="container py-4">
-  {{ partial "breadcrumbs.html" . }}
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-xl-8">
+      {{ partial "breadcrumbs.html" . }}
 
-  <h1 class="mb-3">{{ .Title }}</h1>
+      <h1 class="mb-3">{{ .Title }}</h1>
 
-  <p class="text-muted">
-    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-    <span>· {{ .Site.Params.author }}</span>
-    <span>
-      Tags: {{ range .Params.tags }}
-      <a class="badge bg-secondary me-1" href="/tags/{{ . | urlize }}">
-        {{ . }}
-      </a>
+      <p class="text-muted d-flex flex-wrap align-items-center gap-2 small mb-4">
+        <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i>{{ .Date.Format "Jan 2, 2006" }}</span>
+        <span>·</span>
+        <span><i class="bi bi-clock me-1" aria-hidden="true"></i>{{ printf (i18n "blog.reading_time") .ReadingTime }}</span>
+        <span>·</span>
+        <span><i class="bi bi-person me-1" aria-hidden="true"></i>{{ .Site.Params.authorFullName }}</span>
+        {{ with .Params.tags }}
+        <span>·</span>
+        <span class="d-inline-flex flex-wrap gap-1">
+          {{ range . }}
+          <a class="badge bg-secondary text-decoration-none" href="/tags/{{ . | urlize }}">
+            {{ . }}
+          </a>
+          {{ end }}
+        </span>
+        {{ end }}
+      </p>
+
+      {{ if .Params.image }}
+      <div class="mb-4">
+        {{ partial "webp-img.html" (dict "src" (.Params.image | relURL) "alt" .Params.imageTitle "maxHeight" "440px") }}
+      </div>
       {{ end }}
-    </span>
-  </p>
 
-  {{ if .Params.image }} {{ partial "webp-img.html" (dict "src" (.Params.image
-  | relURL) "alt" .Params.imageTitle ) }} {{ end }}
+      <div class="article-content my-4 lh-lg">
+        {{ .Content }}
+      </div>
 
-  <div class="my-4">{{ .Content }}</div>
+      {{- /* Author Bio Card */ -}}
+      <section class="card border-0 bg-light my-5 p-4 rounded-3 shadow-sm" aria-labelledby="author-bio-heading">
+        <div class="row align-items-center g-3">
+          <div class="col-auto">
+            <div class="author-avatar-wrap" style="width: 80px; height: 80px;">
+              {{ partial "webp-img.html" (dict "src" "/images/consultant-thumb.jpg" "alt" .Site.Params.authorFullName "class" "rounded-circle object-fit-cover w-100 h-100" "maxHeight" "80px") }}
+            </div>
+          </div>
+          <div class="col">
+            <h2 class="h6 fw-bold mb-1 text-uppercase text-muted" id="author-bio-heading">
+              {{ i18n "blog.author_bio_title" }}
+            </h2>
+            <h3 class="h5 fw-bold mb-2">{{ .Site.Params.authorFullName }}</h3>
+            <p class="small text-muted mb-2">
+              {{ i18n "blog.author_bio_text" }}
+            </p>
+            <div class="d-flex gap-3 small">
+              <a class="fw-semibold text-decoration-none" href="https://www.linkedin.com/in/madhuchhanda-padhy-61944a320" target="_blank" rel="me noopener noreferrer" aria-label="{{ i18n "aria.linkedin" }}">
+                <i class="bi bi-linkedin me-1" aria-hidden="true"></i>LinkedIn
+              </a>
+              <a class="fw-semibold text-decoration-none" href="{{ .Site.Params.instagram.url }}" target="_blank" rel="me noopener noreferrer" aria-label="{{ i18n "social.instagram_label" }} — {{ i18n "aria.instagram" }}">
+                <i class="bi bi-instagram me-1" aria-hidden="true"></i>Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <hr class="my-5" />
+      {{- /* Unified Booking Call-to-Action Card */ -}}
+      <div class="card border-primary border-opacity-25 bg-white p-4 p-md-5 my-5 rounded-3 text-center shadow-sm">
+        <h2 class="h4 fw-bold mb-2">Ready to talk this through?</h2>
+        <p class="text-muted mb-4">
+          Explore what you are experiencing in a supportive, confidential space. Begin at your own pace.
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+        </div>
+        {{ partial "consultation-note.html" (dict "context" . "variant" "hero") }}
+      </div>
 
-  <p class="text-muted">
-    Ready to talk this through?
-    <a
-      href="{{ .Site.Params.bookingURL }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Book a Discovery Call on WhatsApp"
-      >Book a Discovery Call</a
-    >.
-  </p>
+      {{- /* Psychoeducational Disclaimer */ -}}
+      <p class="small text-muted fst-italic border-top pt-3">
+        <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+        {{ i18n "blog.disclaimer" }}
+      </p>
+
+    </div>
+  </div>
 </article>
 
 {{ end }}
-

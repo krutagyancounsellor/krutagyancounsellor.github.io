@@ -64,6 +64,13 @@
 [social]
   instagram_label = "Connect on Instagram"
 
+[blog]
+  reading_time = "%d min read"
+  author_bio_title = "About the Author"
+  author_bio_text = "Madhuchhanda holds a Postgraduate Diploma in Counselling & Psychotherapy with over 15 years in education and leadership. Her practice is person-centred and integrative, offering a reflective space to explore life transitions, roles, and self-understanding."
+  disclaimer = "Psychoeducational disclaimer: The articles and reflections shared here are for informational and reflective purposes only. They are not a substitute for clinical psychological assessment, medical advice, or crisis intervention."
+  related_heading = "Explore More Articles"
+
 # Accessibility labels.
 [aria]
   booking_cta = "opens WhatsApp in a new tab"

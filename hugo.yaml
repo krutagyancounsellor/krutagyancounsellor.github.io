@@ -120,7 +120,7 @@ params:
       url: https://x.com/krutagyanc
 
 pagination:
-  pagerSize: 2
+  pagerSize: 6
 
 permalinks:
   # `:contentbasename` keeps the short, stable URLs derived from each Markdown
@@ -162,5 +162,6 @@ menu:
     - name: "Privacy Policy"
       url: "/privacy-policy/"
       weight: 2
+
 
 
