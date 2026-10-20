@@ -1,12 +1,12 @@
 {{- /*
   Booking call-to-action. Accepts an optional `text` argument:
-      {{< contact-link >}}                → "Book a Discovery Call"
+      {{< contact-link >}}                → the offer-aware booking label
       {{< contact-link "Get in touch" >}} → "Get in touch"
 
   Opens WhatsApp directly (no third-party form). Add `class` to restyle.
 */ -}}
 
-{{- $label := .Get 0 | default "Book a Discovery Call" -}}
+{{- $label := .Get 0 | default (partial "offer-label.html" (dict "context" .)) -}}
 {{- $waText := .Site.Params.whatsappText | urlquery -}}
 {{- $waURL := printf "https://wa.me/%s?text=%s" .Site.Params.whatsapp $waText -}}
 
@@ -15,7 +15,7 @@
   href="{{ $waURL }}"
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="{{ $label }} — opens WhatsApp in a new tab"
+  aria-label="{{ $label }} — {{ i18n "aria.booking_cta" }}"
   >{{ $label }}</a
 >
 

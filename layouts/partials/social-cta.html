@@ -1,0 +1,38 @@
+{{- /*
+  Shared Instagram button.
+
+  Instagram is where the counsellor actively posts reflections, client
+  experiences and current offers, so it is surfaced in the hero as a secondary
+  call-to-action next to the primary booking button.
+
+  Unlike the booking CTA, this is NOT offer-gated: Instagram is a permanent
+  channel and must survive `params.offer.enabled` being switched off.
+
+  The URL comes from `params.instagram.url`, the single source of truth shared
+  with the footer icon and the structured data.
+
+  Usage:
+    {{ partial "social-cta.html" . }}
+    {{ partial "social-cta.html" (dict "context" . "size" "lg" "class" "btn-outline-primary") }}
+
+  Params (all optional):
+    context  Page context (required — supplies .Site.Params)
+    size     "lg" | "" (default "") — button size
+    class    Extra CSS classes appended to the button
+*/ -}}
+
+{{- $ctx := .context | default . -}}
+{{- $url := $ctx.Site.Params.instagram.url -}}
+{{- $label := i18n "social.instagram_label" -}}
+{{- $size := cond (eq .size "lg") "btn-lg" "" -}}
+
+<a
+  class="btn {{ $size }} px-4 {{ .class }} hero-instagram-cta"
+  href="{{ $url }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="{{ $label }} — {{ i18n "aria.instagram" }}"
+>
+  <i class="bi bi-instagram me-2" aria-hidden="true"></i>
+  {{ $label }}
+</a>

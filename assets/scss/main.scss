@@ -47,19 +47,149 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
-// Large muted number above each "How Counselling Works" step.
+// Small brand eyebrow above the hero headline.
+.brand-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $primary;
+}
+
+// Large muted number above each "How to Begin" step.
 .step-number {
   font-size: 1.5rem;
   line-height: 1;
 }
 
 // Slight lift on the numbered steps to read as cards.
-.how-it-works .col-md-6,
-.how-it-works .col-lg-3 {
+.how-to-begin .col-md-6,
+.how-to-begin .col-lg-4 {
   > div {
     background: var(--bs-body-bg);
     border-radius: $btn-border-radius;
   }
+}
+
+// Four-item "You might be:" list in Section 2.
+.intent-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.intent-item {
+  padding-left: 1rem;
+  border-left: 3px solid $primary-light;
+
+  p {
+    line-height: 1.6;
+    color: $body-color;
+    opacity: 0.85;
+  }
+}
+
+// --- Session details (Section 6B) -----------------------------------------
+.session-facts {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 0 2rem;
+  border: 1px solid $border-color;
+  border-radius: $btn-border-radius;
+  background: $card-bg;
+  padding: 1rem 1.25rem;
+}
+
+.session-fact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding: 0.6rem 0;
+
+  & + .session-fact {
+    border-top: 1px solid $border-color;
+  }
+
+  dt {
+    font-weight: 600;
+    color: $body-color;
+    min-width: 12rem;
+  }
+
+  dd {
+    margin: 0;
+    color: $body-color;
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .session-fact dt {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+// Urgent-help notice. Uses the danger tone so it reads as a safety notice
+// without competing with the primary call-to-action.
+.crisis-notice {
+  border: 1px solid $danger;
+  border-left-width: 4px;
+  border-radius: $btn-border-radius;
+  background: rgba($danger, 0.06);
+  padding: 1rem 1.25rem;
+
+  p {
+    line-height: 1.6;
+    color: $body-color;
+  }
+}
+
+// --- Hero secondary actions ------------------------------------------------
+// The Instagram button sits directly under the primary WhatsApp button. The
+// label is short, so the icon can sit slightly larger than the text.
+.hero-instagram-cta {
+  .bi {
+    font-size: 1.15rem;
+  }
+}
+
+// --- Hero consultant photo -------------------------------------------------
+// The photo is rendered twice: once in the right-hand column (desktop only,
+// `.d-none.d-lg-block`) and once inline in the text flow directly after the
+// subtitle (mobile only, `.d-lg-none`). Both copies resolve to the same
+// Hugo-generated files, so the browser only downloads each file once.
+//
+// The source image is 800x666 (landscape, 1.2:1). Rather than capping the
+// *height* — which would crop the picture aggressively on tablets — the
+// mobile copy caps its *width*, so the photo keeps its natural aspect ratio
+// and is never cropped at any breakpoint.
+.hero-photo-wrap {
+  // Keep the picture block flush with the text column on narrow screens.
+  > picture {
+    display: block;
+  }
+
+  // The image's inline `max-height` reads this custom property, so the
+  // stylesheet stays in control of the crop at every breakpoint.
+  --img-max-height: 420px;
+}
+
+.hero-photo {
+  object-fit: cover;
+}
+
+// Width cap applies to the mobile copy only (the desktop copy sits in its own
+// column and is not width-constrained).
+.hero-photo-wrap .hero-photo {
+  // Cap the width so the landscape photo does not span the full width of a
+  // tablet, and centre it under the (centred) mobile hero text.
+  max-width: 420px;
+  margin-inline: auto;
+
+  // If the photo is ever cropped (e.g. a very short viewport), favour the
+  // face rather than the centre of the picture. The desktop copy keeps the
+  // default crop so its rendering is unchanged.
+  object-position: center 25%;
 }
 
 // --- Sticky header -------------------------------------------------------

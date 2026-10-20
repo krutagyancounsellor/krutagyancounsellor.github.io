@@ -1,0 +1,71 @@
+# ---------------------------------------------------------------------------
+# UI STRINGS (Hugo translation table)
+# ---------------------------------------------------------------------------
+# Every user-facing string that is not long-form body copy lives here, so a
+# future second language only requires adding `i18n/<lang>.toml` — no template
+# changes.
+#
+# The complimentary-initial-consultation copy is deliberately *common* text
+# (`[offer]` below): the same note + disclaimer is reused in the hero, in
+# Section 6B and in the closing CTA via `partials/consultation-note.html`.
+# ---------------------------------------------------------------------------
+
+[brand]
+  eyebrow = "KRUTAGYANCounsellor"
+
+# The single booking call-to-action label, used by every button on the site.
+# `label` is shown while the complimentary offer is live; `label_off` is the
+# fallback once it is switched off (see `params.offer.enabled` in hugo.yaml).
+[cta]
+  label = "Request a free Consultation"
+  label_off = "Request a Consultation"
+
+# Common complimentary-consultation text.
+[offer]
+  hero_note = "A 30-minute introductory conversation · Available until 31 January 2027"
+  disclaimer = "This is an introductory conversation to understand the counselling approach, ask questions and explore suitability. It is not a counselling session, and there is no obligation to continue."
+  step_note = "I'm offering a complimentary 30-minute initial consultation until 31 January 2027."
+  final_note = "Available until 31 January 2027. Advance booking required; appointments subject to availability."
+
+# Section headings and eyebrows.
+[section]
+  approach_eyebrow = "The Krutagyan Approach"
+  about_eyebrow = "About the Counsellor"
+  how_to_begin_heading = "How to Begin"
+  how_to_begin_sub = "You don't need to have everything figured out before you reach out."
+  session_heading = "Session Details"
+  suitability_heading = "Is this the right support for you?"
+  ready_heading = "Ready to take the first step?"
+  crisis_heading = "If you need urgent help"
+
+# Session details (Section 6B). Labels live here; the values live in
+# `params.session` in hugo.yaml so the fee and duration have a single
+# source of truth shared with the structured data.
+[session]
+  duration_label = "Counselling session"
+  fee_label = "Session fee"
+  consultation_label = "Complimentary initial consultation"
+  booking_label = "Booking"
+
+# Scope-of-practice and crisis guidance (Section 6B).
+# The `_off` variants are used when `params.offer.enabled` is false, so that no
+# complimentary-consultation wording survives once the offer is switched off.
+[suitability]
+  crisis_body = "If you are in immediate danger, are thinking about suicide or harming yourself or someone else, or feel unable to keep yourself safe, please contact local emergency services or go to the nearest emergency department. An appointment request or initial consultation is not a substitute for immediate help."
+  ready_body = "Book a complimentary 30 minute initial consultation to discuss, in broad terms, what has brought you here, ask questions about my approach and explore whether the support I offer may be suitable for you."
+  ready_body_off = "Book an initial consultation to discuss, in broad terms, what has brought you here, ask questions about my approach and explore whether the support I offer may be suitable for you."
+  booking_body = "Follow the booking instructions to arrange a suitable time. Advance booking is required, and appointments are subject to availability. The complimentary consultation is available until 31 January 2027."
+  booking_body_off = "Follow the booking instructions to arrange a suitable time. Advance booking is required, and appointments are subject to availability."
+  closing_body = "This is an introductory conversation, not a counselling session. It is an opportunity to understand the approach and explore suitability, with no obligation to continue."
+  closing_body_off = "An initial consultation is an opportunity to understand the approach and explore suitability, with no obligation to continue."
+
+# Instagram. Instagram is a permanent channel, not part of the time-limited
+# complimentary offer, so these strings are NOT offer-gated.
+[social]
+  instagram_label = "Connect on Instagram"
+
+# Accessibility labels.
+[aria]
+  booking_cta = "opens WhatsApp in a new tab"
+  instagram = "opens Instagram in a new tab"
+  linkedin = "Explore my professional background on LinkedIn — opens in a new tab"

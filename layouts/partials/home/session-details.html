@@ -1,0 +1,76 @@
+{{- /*
+  Section 6B — Session details, suitability/scope guidance, crisis notice and
+  the secondary call-to-action.
+
+  The session values come from `params.session` in hugo.yaml so the fee and
+  duration have a single source of truth (also used by the structured data).
+  Labels come from `i18n/en.toml` so they are translation-ready.
+*/ -}}
+{{- $offer := .Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+{{- $session := .Site.Params.session -}}
+
+<section class="session-details bg-light py-5" id="session-details">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 prose-narrow">
+        <h2 class="h3 fw-bold mb-4">{{ i18n "section.session_heading" }}</h2>
+
+        {{- /* Session facts list */ -}}
+        <dl class="session-facts mb-4">
+          <div class="session-fact">
+            <dt>{{ i18n "session.duration_label" }}</dt>
+            <dd>{{ $session.duration }}</dd>
+          </div>
+          <div class="session-fact">
+            <dt>{{ i18n "session.fee_label" }}</dt>
+            <dd>{{ $session.fee }}</dd>
+          </div>
+          {{ if $on }}
+          <div class="session-fact">
+            <dt>{{ i18n "session.consultation_label" }}</dt>
+            <dd>{{ $session.complimentary }}</dd>
+          </div>
+          {{ end }}
+          <div class="session-fact">
+            <dt>{{ i18n "session.booking_label" }}</dt>
+            <dd>{{ $session.booking }}</dd>
+          </div>
+        </dl>
+
+        {{- /* Is this the right support for you? */ -}}
+        <h3 class="h5 fw-bold mb-3">
+          {{ i18n "section.suitability_heading" }}
+        </h3>
+
+        <p>{{ cond $on (i18n "suitability.ready_body") (i18n "suitability.ready_body_off") }}</p>
+
+        <p>{{ cond $on (i18n "suitability.booking_body") (i18n "suitability.booking_body_off") }}</p>
+
+        <p class="mb-0">
+          Counselling may be helpful if you are navigating a life transition,
+          reconsidering familiar roles, questioning beliefs you have held for
+          years, or trying to understand yourself in the context of your
+          relationships, family and culture.
+        </p>
+
+        {{- /* Secondary call-to-action */ -}}
+        <div class="mt-4">
+          {{ partial "booking-cta.html" (dict "context" .) }}
+        </div>
+
+        {{- /* Common complimentary-consultation note (offer-gated). */ -}}
+        {{ partial "consultation-note.html" (dict "context" . "variant" "plain") }}
+
+        {{- /* Crisis / urgent-help notice */ -}}
+        <aside class="crisis-notice mt-4" role="note" aria-labelledby="crisis-heading">
+          <h3 class="h6 fw-bold mb-2" id="crisis-heading">
+            {{ i18n "section.crisis_heading" }}
+          </h3>
+          <p class="mb-0">{{ i18n "suitability.crisis_body" }}</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

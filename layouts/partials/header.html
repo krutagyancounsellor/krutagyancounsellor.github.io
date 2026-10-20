@@ -32,18 +32,11 @@
       </ul>
     </div>
 
-    <!-- Booking CTA: "Book a Consultation" pill button -->
+    <!-- Booking CTA: offer-aware pill button. The label comes from
+         `partials/offer-label.html`, so it matches every other CTA on the
+         site and switches with `params.offer.enabled`. -->
     <div class="mt-2 mt-lg-0">
-      <a
-        class="btn header-book-btn rounded-pill"
-        href="{{ .Site.Params.bookingURL }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Book a free initial consultation — opens WhatsApp in a new tab"
-      >
-        <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
-        Request a Consultation
-      </a>
+      {{ partial "booking-cta.html" (dict "context" . "class" "header-book-btn rounded-pill") }}
     </div>
   </div>
 </nav>

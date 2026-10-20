@@ -1,0 +1,41 @@
+{{- /*
+  Common complimentary-consultation text.
+
+  A single reusable block that renders the "complimentary initial consultation"
+  note together with the standard disclaimer ("this is an introductory
+  conversation ... no obligation to continue").
+
+  The text lives once in `i18n/en.toml` under `[offer]`, so the same wording
+  appears in the hero, in Section 6B and in the closing CTA — and translating
+  the site later means editing one file.
+
+  The whole block is offer-gated: when `params.offer.enabled` is false it
+  renders nothing at all.
+
+  Usage:
+    {{ partial "consultation-note.html" . }}
+    {{ partial "consultation-note.html" (dict "context" . "variant" "hero") }}
+
+  Params (all optional):
+    context  Page context (required — supplies .Site.Params)
+    variant  "hero" (default) — adds the short one-line note
+             "plain"          — disclaimer only
+*/ -}}
+
+{{- $ctx := .context | default . -}}
+{{- $offer := $ctx.Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+{{- $variant := .variant | default "hero" -}}
+
+{{- if $on -}}
+<p class="text-muted small mt-3 mb-0">
+  <i class="bi bi-gift me-1" aria-hidden="true"></i>
+  {{ i18n "offer.hero_note" }}
+</p>
+{{- if eq $variant "hero" -}}
+<p class="text-muted small mb-0 mt-2">
+  {{ i18n "offer.disclaimer" }}
+</p>
+{{- end -}}
+{{- end -}}

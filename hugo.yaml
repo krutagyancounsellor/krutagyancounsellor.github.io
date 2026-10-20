@@ -4,6 +4,19 @@ baseURL: https://krutagyancounsellor.github.io/
 # element and `og:locale`. Requires Hugo 0.158+ (replaced `languageCode`).
 locale: en-in
 defaultContentLanguage: en
+# ---------------------------------------------------------------------------
+# Languages. A single language today; the block exists so that adding a second
+# language later is a matter of adding an entry here plus `i18n/<lang>.toml`
+# (and, if needed, `content/<lang>/`). All UI strings already live in
+# `i18n/en.toml` and are referenced with `i18n`/`T`, so no template changes
+# are required to translate.
+# ---------------------------------------------------------------------------
+languages:
+  en:
+    label: English
+    locale: en-IN
+    weight: 1
+
 title: Krutagyan Counsellor
 enableRobotsTXT: true
 
@@ -12,11 +25,7 @@ enableRobotsTXT: true
 # contact detail, social profile and SEO default used across the templates.
 # ---------------------------------------------------------------------------
 params:
-  description: >-
-    Reflective, person-centred online counselling with Madhuchhanda Padhy.
-    A confidential space to understand yourself, your experiences and the
-    influences that shape you. Non-clinical, non-crisis support — book a
-    free initial consultation.
+  description: Online, person-centred counselling for life transitions, changing roles, relationships and self-understanding. Explore your experiences in the context of family, culture and personal beliefs.
   author: Madhuchhanda
   authorFullName: Madhuchhanda Padhy
   email: krutagyancounsellor@gmail.com
@@ -25,34 +34,47 @@ params:
   whatsapp: "919632871524"
   whatsappText: "Hi, I'd like to book a counselling session."
   twitter: "@krutagyanc"
+  # Brand suffix appended to every page <title>. Kept separate from the
+  # top-level `title` (which is the spaced, human-facing brand used in the
+  # footer, og:site_name and structured data) so the suffix can use the
+  # no-space spelling.
+  titleSuffix: "KrutagyanCounsellor"
   # Shown in the homepage <title> — keyword-rich, under ~60 characters.
-  homeTitle: "Person-Centred Online Counselling | Reflection & Clarity"
+  # The brand suffix is appended automatically, so do not repeat it here.
+  homeTitle: "Online Counselling for Life Identity & Transitions"
   bookingURL: https://wa.me/919632871524?text=Hi%2C%20I%27d%20like%20to%20book%20a%20counselling%20session.
 
   # -------------------------------------------------------------------------
   # LIMITED-TIME OFFER — removable in one step.
-  # Set `enabled: false` (or delete this whole block) to remove every offer
-  # line/sentence from the homepage and revert all booking buttons to
-  # `ctaLabelOff`. Nothing else needs to change.
+  # Set `enabled: false` to remove every offer line/sentence from the homepage
+  # and revert all booking buttons to the "off" label. The labels and the
+  # accompanying copy live in `i18n/en.toml` (see `[cta]` and `[offer]`), so
+  # a future second language only needs a new translation file.
   # -------------------------------------------------------------------------
   offer:
     enabled: true
-    # Button text: while the offer is live vs once it has been removed.
-    ctaLabel: "Request a free Consultation"
-    ctaLabelOff: "Request a Consultation"
-    # Short line shown under the hero button.
-    heroNote: "Complimentary 30-minute free consultation · Available until 31 January 2027"
-    # Step 01 of "How Counselling Works".
-    stepSubtitle: "A first conversation, without the initial fee."
-    stepSubtitleOff: "A first conversation to see whether we're a good fit."
-    stepNote: "I'm offering a complimentary 30-minute initial consultation until 31 January 2027."
-    # Line shown under the closing CTA button.
-    finalNote: "Available until 31 January 2027. Advance booking required; appointments subject to availability."
+
+  # -------------------------------------------------------------------------
+  # Session details shown in Section 6B. Kept in params so the fee, duration
+  # and booking terms can be updated in one place.
+  # -------------------------------------------------------------------------
+  session:
+    duration: "60 minutes"
+    fee: "₹1,200 to ₹2,000, on a sliding scale."
+    complimentary: "30 minutes, available until 31 January 2027."
+    booking: "Advance booking is required. Appointment times are subject to availability."
+
+  # -------------------------------------------------------------------------
+  # Instagram — the primary channel for reflections, client experiences and
+  # current offers. Kept as a dedicated block (rather than only an entry in
+  # `socials`) so the hero CTA, the footer icon and the structured data all
+  # resolve to the same URL. `verify-seo.js` asserts they stay in sync.
+  # -------------------------------------------------------------------------
+  instagram:
+    handle: "@krutagyancounsellor"
+    url: https://www.instagram.com/krutagyancounsellor/
 
   socials:
-    - name: Instagram
-      icon: bi-instagram
-      url: https://www.instagram.com/krutagyancounsellor/
     - name: Facebook
       icon: bi-facebook
       url: https://www.facebook.com/krutagyancounsellor

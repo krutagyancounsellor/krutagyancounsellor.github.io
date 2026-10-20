@@ -56,6 +56,15 @@
 
       <div class="col-md-3">
         <ul class="list-unstyled mb-0 d-flex justify-content-center justify-content-md-end gap-3">
+          {{- /* Instagram comes from `params.instagram` so the hero CTA, the
+                 footer icon and the structured data all share one URL. */ -}}
+          <li>
+            <a class="link-light fs-5" href="{{ .Site.Params.instagram.url }}" target="_blank" rel="me noopener noreferrer"
+              aria-label="Instagram ({{ .Site.Params.instagram.handle }}) — opens in a new tab"
+              title="Instagram {{ .Site.Params.instagram.handle }}">
+              <i class="bi bi-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
           {{ range .Site.Params.socials }}
           <li>
             <a class="link-light fs-5" href="{{ .url }}" target="_blank" rel="me noopener noreferrer"

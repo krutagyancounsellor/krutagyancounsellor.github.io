@@ -1,0 +1,24 @@
+{{- /*
+  Offer-aware booking call-to-action label.
+
+  Returns the single label used by EVERY booking button on the site, so the
+  wording is defined in exactly one place and the complimentary offer can be
+  retired in one step.
+
+  The label is resolved from the Hugo translation table (`i18n/en.toml`),
+  which keeps it ready for future multilingual support:
+    - offer enabled  → `[cta] label`     ("Request a free Consultation")
+    - offer disabled → `[cta] label_off` ("Request a Consultation")
+
+  Usage:
+    {{ partial "offer-label.html" . }}                 → uses the current page context
+    {{ partial "offer-label.html" (dict "context" .) }}
+*/ -}}
+
+{{- $ctx := .context | default . -}}
+{{- $offer := $ctx.Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+
+{{- $key := cond $on "cta.label" "cta.label_off" -}}
+{{- i18n $key -}}

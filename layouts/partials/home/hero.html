@@ -1,39 +1,67 @@
 {{- /* Section 1 — Hero */ -}}
-{{- $offer := .Site.Params.offer -}}
 
 <section class="hero-section container-fluid py-5">
   <div class="row align-items-center g-5">
     <div class="col-lg-6 text-center text-lg-start">
+      <p class="brand-eyebrow mb-2">{{ i18n "brand.eyebrow" }}</p>
+
       <h1 class="display-5 fw-bold mb-3">
-        You don't have to figure everything out on your own.
+        You don't have to have it all figured out.
       </h1>
       <p class="lead text-muted mb-3">
-        A space to understand yourself, your experiences, and the influences
-        that shape you.
-      </p>
-      <p class="mb-4">
-        Sometimes, the difficult part isn't knowing what to do. It's
-        understanding why something feels difficult in the first place.
+        Person-centred, integrative counselling for life transitions and
+        self-understanding.
       </p>
 
-      <div
-        class="d-grid gap-2 d-sm-flex justify-content-sm-center justify-content-lg-start"
-      >
-        {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+      {{- /* Mobile-only copy of the consultant photo. It sits directly after
+           the subtitle so the headline, the subtitle and a human face are all
+           visible above the fold on a phone. The desktop copy lives in the
+           right-hand column below (`.d-none.d-lg-block`). Both copies point
+           at the same Hugo-generated files, so nothing is downloaded twice. */ -}}
+      <div class="d-lg-none mb-4 hero-photo-wrap">
+        {{ partial "webp-img.html" (dict "src" "/images/consultant.jpg" "alt"
+        "Krutagyan Counsellor — Madhuchhanda Padhy" "class" "hero-photo"
+        "maxHeight" "420px" "loading" "eager" "fetchpriority" "high") }}
       </div>
 
-      {{- /* Offer note — removed automatically when the offer is turned off. */ -}}
-      {{ with $offer }}{{ if .enabled }}
-      <p class="text-muted small mt-3 mb-0">
-        <i class="bi bi-gift me-1" aria-hidden="true"></i>
-        {{ .heroNote }}
+      <p>
+        When familiar roles, relationships or expectations begin to change, it
+        can become difficult to understand where you stand and what feels right
+        for you.
       </p>
-      {{ end }}{{ end }}
+
+      <p>
+        Perhaps you're navigating a life transition, questioning long-held
+        beliefs, balancing personal choices with family expectations, or trying
+        to understand yourself beyond the roles you occupy.
+      </p>
+
+      <p>
+        Counselling offers a space to explore these experiences in the context
+        of your relationships, family, culture and personal beliefs. Together,
+        we can examine your feelings, recurring patterns and different
+        perspectives at a pace that respects your individual experience.
+      </p>
+
+      <p class="mb-4">
+        You don't need to know exactly where to begin.
+      </p>
+
+      {{/* The primary WhatsApp button and the secondary Instagram button always
+           sit on separate lines, on every breakpoint. */}}
+      <div class="d-grid gap-2">
+        {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
+        {{ partial "social-cta.html" (dict "context" . "size" "lg" "class" "btn-outline-primary") }}
+      </div>
+
+      {{- /* Common complimentary-consultation note + disclaimer. */ -}}
+      {{ partial "consultation-note.html" (dict "context" . "variant" "hero") }}
     </div>
 
     <div class="col-lg-6 d-none d-lg-block">
       {{ partial "webp-img.html" (dict "src" "/images/consultant.jpg" "alt"
-      "Krutagyan Counsellor — Madhuchhanda Padhy") }}
+      "Krutagyan Counsellor — Madhuchhanda Padhy" "class" "hero-photo"
+      "loading" "eager" "fetchpriority" "high") }}
     </div>
   </div>
 </section>

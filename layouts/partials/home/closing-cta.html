@@ -1,31 +1,29 @@
-{{- /* Section 7 — Closing CTA */ -}}
+{{- /* Section 7 — Closing call-to-action */ -}}
 {{- $offer := .Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
 
-<section class="home-closing-cta bg-light py-5">
+<section class="closing-cta bg-white py-5">
   <div class="container">
     <div class="row justify-content-center text-center">
-      <div class="col-lg-7">
-        <h2 class="fw-bold mb-3">Begin with a conversation.</h2>
-        <p class="text-muted">
-          You don't have to wait until things feel unbearable to seek support.
-          You also don't have to know exactly what you need before asking
-          questions.
-        </p>
+      <div class="col-lg-8">
+        <h2 class="h3 fw-bold mb-3">{{ i18n "section.ready_heading" }}</h2>
+
         <p class="text-muted mb-4">
-          A first conversation can help you understand the process and decide
-          whether it is right for you.
+          {{ cond $on (i18n "suitability.closing_body") (i18n "suitability.closing_body_off") }}
         </p>
 
-        <div
-          class="d-grid gap-2 d-sm-flex justify-content-sm-center"
-        >
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           {{ partial "booking-cta.html" (dict "context" . "size" "lg") }}
         </div>
 
         {{- /* Offer note — removed automatically when the offer is turned off. */ -}}
-        {{ with $offer }}{{ if .enabled }}
-        <p class="text-muted small mt-3 mb-0">{{ .finalNote }}</p>
-        {{ end }}{{ end }}
+        {{ if $on }}
+        <p class="text-muted small mt-3 mb-0">
+          <i class="bi bi-gift me-1" aria-hidden="true"></i>
+          {{ i18n "offer.final_note" }}
+        </p>
+        {{ end }}
       </div>
     </div>
   </div>

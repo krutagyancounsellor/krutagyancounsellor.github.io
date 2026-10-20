@@ -1,7 +1,10 @@
 {{- /*
-  Shared booking button. Used by every homepage call-to-action so the label
-  is defined in exactly one place and the limited-time offer can be removed
-  in a single step.
+  Shared booking button. Used by every call-to-action on the site so the
+  label, the link and the offer behaviour are defined in exactly one place.
+
+  The button label is resolved by `partials/offer-label.html`, which returns
+  the offer-aware label ("Request a free Consultation" while the complimentary
+  offer is live, "Request a Consultation" once it is switched off).
 
   Usage:
     {{ partial "booking-cta.html" . }}                              → primary button
@@ -11,17 +14,10 @@
     context  Page context (required — supplies .Site.Params)
     size     "lg" | "" (default "") — button size
     class    Extra CSS classes appended to the button
-    label    Override the button text entirely (ignores the offer label)
 */ -}}
 
 {{- $ctx := .context | default . -}}
-{{- $offer := $ctx.Site.Params.offer -}}
-{{- $on := false -}}
-{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
-
-{{- $label := $offer.ctaLabelOff | default "Request a Consultation" -}}
-{{- if $on -}}{{- $label = $offer.ctaLabel | default $label -}}{{- end -}}
-{{- with .label -}}{{- $label = . -}}{{- end -}}
+{{- $label := partial "offer-label.html" (dict "context" $ctx) -}}
 
 {{- /*
   `params.bookingURL` is the single source of truth. It is assembled here only
@@ -38,7 +34,7 @@
   href="{{ $waURL }}"
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="{{ $label }} — opens WhatsApp in a new tab"
+  aria-label="{{ $label }} — {{ i18n "aria.booking_cta" }}"
 >
   <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
   {{ $label }}

@@ -16,14 +16,27 @@
   {{- $desc = $page.Site.Params.description -}}
 {{- end -}}
 
-{{- /* Page titles: the homepage uses the bare brand name, other pages use
-       "Title | Brand". Keep the whole thing under ~60 chars where possible. */ -}}
+{{- /* Page titles: every page ends with the brand suffix, e.g.
+       "Finding Your Anchor: … | KrutagyanCounsellor".
+       The homepage uses `params.homeTitle` as its lead text and the other
+       pages use their own title. The suffix is never duplicated: if a page
+       title already contains it (case-insensitively), it is left alone.
+       Keep the whole thing under ~60 chars where possible. */ -}}
+{{- $suffix := $page.Site.Params.titleSuffix | default $page.Site.Title -}}
 {{- $title := "" -}}
 {{- if $page.IsHome -}}
   {{- $tagline := $page.Site.Params.homeTitle | default "" -}}
-  {{- $title = printf "%s%s" $page.Site.Title (cond (ne $tagline "") (printf " | %s" $tagline) "") -}}
+  {{- if eq $tagline "" -}}
+    {{- $title = $suffix -}}
+  {{- else if not (strings.Contains (lower $tagline) (lower $suffix)) -}}
+    {{- $title = printf "%s | %s" $tagline $suffix -}}
+  {{- else -}}
+    {{- $title = $tagline -}}
+  {{- end -}}
+{{- else if not (strings.Contains (lower $page.Title) (lower $suffix)) -}}
+  {{- $title = printf "%s | %s" $page.Title $suffix -}}
 {{- else -}}
-  {{- $title = printf "%s | %s" $page.Title $page.Site.Title -}}
+  {{- $title = $page.Title -}}
 {{- end -}}
 
 {{- /* Social share image: the page's own image if it has one, otherwise the

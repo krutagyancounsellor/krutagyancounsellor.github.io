@@ -1,4 +1,15 @@
-{{ $src := .src }} {{ $alt := .alt | default "Image" }} {{ $img := resources.Get
+{{- /*
+  Responsive `<picture>` helper.
+
+  Params:
+    src           Image path (required) — e.g. "/images/consultant.jpg"
+    alt           Alt text (defaults to "Image")
+    class         Extra CSS classes, appended after the base ones
+    maxHeight     CSS max-height for the image (defaults to "500px")
+    loading       "lazy" (default) or "eager"
+    fetchpriority Optional, e.g. "high" — used for above-the-fold images
+*/ -}}
+{{- $src := .src }} {{- $alt := .alt | default "Image" }} {{- $extraClass := .class | default "" }} {{- $maxHeight := .maxHeight | default "500px" }} {{- $loading := .loading | default "lazy" }} {{- $fetchpriority := .fetchpriority | default "" }} {{- $img := resources.Get
 $src }} {{ if $img }} {{ $webp := $img.Process "webp q80" }}
 <picture>
   <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
@@ -7,9 +18,10 @@ $src }} {{ if $img }} {{ $webp := $img.Process "webp q80" }}
     alt="{{ $alt }}"
     width="{{ $img.Width }}"
     height="{{ $img.Height }}"
-    loading="lazy"
-    class="img-fluid rounded shadow-lg"
-    style="max-height: 500px; width: 100%; object-fit: cover"
+    loading="{{ $loading }}"
+    {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}
+    class="img-fluid rounded shadow-lg{{ with $extraClass }} {{ . }}{{ end }}"
+    style="max-height: var(--img-max-height, {{ $maxHeight }}); width: 100%; object-fit: cover"
   />
 </picture>
 {{ else }}

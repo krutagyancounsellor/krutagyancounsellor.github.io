@@ -1,0 +1,117 @@
+{{- /*
+  Section 6A — How to Begin (3 steps).
+  Step 01's subtitle and opening note are offer-gated.
+*/ -}}
+{{- $offer := .Site.Params.offer -}}
+{{- $on := false -}}
+{{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+
+<section class="how-to-begin bg-white py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">{{ i18n "section.how_to_begin_heading" }}</h2>
+      <p class="text-muted mb-0">{{ i18n "section.how_to_begin_sub" }}</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 prose-narrow mb-5">
+        <p>
+          You may be navigating a life transition, reconsidering familiar roles,
+          questioning beliefs you have held for years, or trying to understand
+          why certain experiences affect you in ways you did not expect.
+          Perhaps you know what feels difficult, but are unsure how to make sense
+          of it. Or perhaps you simply feel that something in your life or your
+          understanding of yourself has changed.
+        </p>
+
+        <p class="mb-0">
+          You do not need to arrive with a clear explanation or a specific goal.
+          Counselling can begin with what feels important to you right now.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {{- /* Step 01 */ -}}
+      <div class="col-md-6 col-lg-4">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">01</p>
+          <h3 class="h5 fw-bold">Begin with an introductory conversation</h3>
+          {{ if $on }}
+          <p class="fw-semibold mb-2">{{ i18n "offer.step_note" }}</p>
+          <p class="text-muted">
+            This is an opportunity to talk, in broad terms, about what has
+            brought you here, ask questions about my approach and understand what
+            counselling with me would involve.
+          </p>
+          {{ else }}
+          <p class="text-muted">
+            Your first step is an initial consultation. This is an opportunity to
+            talk, in broad terms, about what has brought you here, ask questions
+            about my approach and understand what counselling with me would
+            involve.
+          </p>
+          {{ end }}
+          <p class="text-muted">
+            We can also consider whether the concerns you bring and the support
+            you are looking for are a suitable fit for my practice.
+          </p>
+          <p class="text-muted mb-0">
+            The initial consultation is an introductory conversation, not a
+            counselling session. It is not intended for in depth therapeutic
+            exploration or treatment, and there is no obligation to continue
+            afterwards.
+          </p>
+        </div>
+      </div>
+
+      {{- /* Step 02 */ -}}
+      <div class="col-md-6 col-lg-4">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">02</p>
+          <h3 class="h5 fw-bold">Decide whether you would like to continue</h3>
+          <p class="text-muted">
+            After the initial consultation, you can take time to decide whether
+            you would like to proceed. If you choose to continue, we can discuss
+            the practical arrangements and schedule your counselling sessions.
+          </p>
+          <p class="text-muted mb-0">
+            You may bring a specific concern, a change in your circumstances, a
+            recurring difficulty or questions that are still taking shape. You do
+            not need to know exactly what you want to work through before
+            beginning.
+          </p>
+        </div>
+      </div>
+
+      {{- /* Step 03 */ -}}
+      <div class="col-md-6 col-lg-4">
+        <div class="p-3 p-lg-4 h-100">
+          <p class="step-number text-primary fw-bold mb-1">03</p>
+          <h3 class="h5 fw-bold">
+            Explore your experiences in the context of your life
+          </h3>
+          <p class="text-muted">
+            Counselling offers a space to reflect on how you understand yourself
+            and what you are experiencing. This may involve looking at the roles
+            you occupy, your relationships, family and cultural expectations,
+            personal beliefs and the changes you are navigating.
+          </p>
+          <p class="text-muted">
+            My approach has a person centred foundation and is informed by
+            different psychological perspectives. Our conversations are guided
+            by your experiences and concerns, rather than by a predetermined
+            explanation of what you should be feeling or doing.
+          </p>
+          <p class="text-muted mb-0">
+            Together, we can examine familiar patterns, question assumptions,
+            consider alternative perspectives and explore how different aspects
+            of your life influence one another. The aim is not to provide ready
+            made answers, but to support a more considered understanding of your
+            experiences and what they mean to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

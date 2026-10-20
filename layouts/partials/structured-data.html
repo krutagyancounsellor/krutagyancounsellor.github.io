@@ -4,13 +4,14 @@
   - `Person` / `LocalBusiness` graph on every page, carrying the email,
     phone, WhatsApp URL and `sameAs` social profiles. `sameAs` is how search
     engines tie the website to its social profiles.
+  - `Offer` schema on the homepage, describing the session fee, duration and
+    the complimentary initial consultation.
   - `Article` schema on blog posts.
-  - `FAQPage` schema on the homepage, auto-generated from data/home-faq.yml.
   - `BreadcrumbList` schema on nested pages.
 */ -}}
 
 {{- $author := .Site.Params.authorFullName -}}
-{{- $socialURLs := slice -}}
+{{- $socialURLs := slice .Site.Params.instagram.url -}}
 {{- range .Site.Params.socials -}}
   {{- $socialURLs = $socialURLs | append .url -}}
 {{- end -}}
@@ -73,29 +74,60 @@
 </script>
 {{- end -}}
 
-{{- /* ---------- FAQPage schema ----------
-  Built from data/home-faq.yml — the same YAML that drives the visible
-  accordion in the homepage "A few things you may be wondering" section, so
-  the visible content and the structured data can never drift apart.
-  Emitted on the homepage only.
+{{- /* ---------- Offer schema (homepage) ----------
+  Describes what the site actually offers: the session duration, the
+  sliding-scale fee, and — while the complimentary offer is live — the
+  introductory consultation. Emitted on the homepage only.
 */ -}}
 {{- if .IsHome -}}
-  {{- $questions := slice -}}
-  {{- range index hugo.Data "home-faq" -}}
-    {{- $questions = $questions | append (dict
-        "@type" "Question"
-        "name" .question
-        "acceptedAnswer" (dict
-          "@type" "Answer"
-          "text" (.answer | markdownify | plainify | htmlUnescape | strings.TrimSpace)
+  {{- $session := .Site.Params.session -}}
+  {{- $offer := .Site.Params.offer -}}
+  {{- $on := false -}}
+  {{- with $offer -}}{{- $on = .enabled | default false -}}{{- end -}}
+  {{- $offerNode := dict
+      "@context" "https://schema.org"
+      "@type" "Offer"
+      "@id" (printf "%s#offer" .Site.BaseURL)
+      "name" (cond $on (i18n "cta.label") (i18n "cta.label_off"))
+      "description" (cond $on (i18n "offer.disclaimer") (i18n "suitability.booking_body_off"))
+      "priceCurrency" "INR"
+      "price" "1200"
+      "priceSpecification" (dict
+        "@type" "PriceSpecification"
+        "minPrice" "1200"
+        "maxPrice" "2000"
+        "priceCurrency" "INR"
+        "valueAddedTaxIncluded" false
+      )
+      "availability" "https://schema.org/InStock"
+      "areaServed" "IN"
+      "url" .Site.Params.bookingURL
+  -}}
+  {{- if $on -}}
+    {{- $offerNode = merge $offerNode (dict
+        "price" "0"
+        "description" (i18n "offer.disclaimer")
+    ) -}}
+  {{- end -}}
+  {{- $offerList := dict
+      "@context" "https://schema.org"
+      "@type" "OfferCatalog"
+      "name" (i18n "section.session_heading")
+      "itemListElement" (slice (dict
+        "@type" "Offer"
+        "name" (i18n "session.duration_label")
+        "description" $session.duration
+        "itemOffered" (dict
+          "@type" "Service"
+          "name" (i18n "session.duration_label")
+          "serviceType" "Counselling"
+          "provider" (dict "@id" (printf "%s#business" .Site.BaseURL))
         )
-      ) -}}
-  {{- end -}}
-  {{- if $questions -}}
+      ))
+  -}}
 <script type="application/ld+json">
-{{- dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $questions | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS -}}
+{{- dict "@context" "https://schema.org" "@graph" (slice $offerNode $offerList) | jsonify (dict "indent" "  " "noHTMLEscape" true) | safeJS -}}
 </script>
-  {{- end -}}
 {{- end -}}
 
 {{- /* ---------- BreadcrumbList schema ---------- */ -}}
