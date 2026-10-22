@@ -93,10 +93,11 @@ params:
   # and booking terms can be updated in one place.
   # -------------------------------------------------------------------------
   session:
-    duration: "60 minutes"
-    fee: "₹1,200 to ₹2,000, on a sliding scale."
+    duration: "45 minutes - 90 minutes"
+    fee: "₹800 to ₹2,000, on a sliding scale."
     complimentary: "30 minutes, available until 31 January 2027."
     booking: "Advance booking is required. Appointment times are subject to availability."
+    mode: "All sessions are conducted online, so you can attend from wherever you are."
 
   # -------------------------------------------------------------------------
   # Instagram — the primary channel for reflections, client experiences and

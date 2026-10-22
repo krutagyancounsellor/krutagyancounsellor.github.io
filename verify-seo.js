@@ -127,7 +127,7 @@ if (/Do I need to know what I want to discuss/.test(home)) {
 }
 
 // 7c. The homepage must publish the session fee and the crisis notice.
-if (!/₹1,200 to ₹2,000/.test(home)) {
+if (!/₹800 to ₹2,000/.test(home)) {
   problems.push("homepage is missing the session fee");
 }
 if (!/If you need urgent help/.test(home)) {

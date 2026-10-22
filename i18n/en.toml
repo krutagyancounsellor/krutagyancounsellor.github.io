@@ -46,6 +46,7 @@
   fee_label = "Session fee"
   consultation_label = "Complimentary initial consultation"
   booking_label = "Booking"
+  mode_label = "Session mode"
 
 # Scope-of-practice and crisis guidance (Section 6B).
 # The `_off` variants are used when `params.offer.enabled` is false, so that no

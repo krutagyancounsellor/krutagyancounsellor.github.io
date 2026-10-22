@@ -20,6 +20,10 @@
         {{- /* Session facts list */ -}}
         <dl class="session-facts mb-4">
           <div class="session-fact">
+            <dt>{{ i18n "session.mode_label" }}</dt>
+            <dd>{{ $session.mode }}</dd>
+          </div>
+          <div class="session-fact">
             <dt>{{ i18n "session.duration_label" }}</dt>
             <dd>{{ $session.duration }}</dd>
           </div>
