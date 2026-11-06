@@ -33,9 +33,10 @@
     {{ $iconsFixed := strings.Replace $iconsRaw.Content "./fonts/" "/fonts/" }}
     {{ $icons := $iconsFixed | resources.FromString "css/bootstrap-icons.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $icons.RelPermalink }}" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="{{ $icons.RelPermalink }}" /></noscript>
 
     {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 
     {{- /* JSON-LD structured data */ -}}
     {{ partial "structured-data.html" . }}

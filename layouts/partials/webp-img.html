@@ -21,7 +21,7 @@ $src }} {{ if $img }} {{ $webp := $img.Process "webp q80" }}
     loading="{{ $loading }}"
     {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}
     class="img-fluid rounded shadow-lg{{ with $extraClass }} {{ . }}{{ end }}"
-    style="max-height: var(--img-max-height, {{ $maxHeight }}); width: 100%; object-fit: cover"
+    style="max-height: var(--img-max-height, {{ $maxHeight }}); width: 100%; aspect-ratio: {{ $img.Width }} / {{ $img.Height }}; object-fit: cover"
   />
 </picture>
 {{ else }}
