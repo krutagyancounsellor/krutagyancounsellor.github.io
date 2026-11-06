@@ -1,0 +1,22 @@
+{{- /*
+  Lightweight SVG icon helper that inlines Bootstrap Icons directly from node_modules.
+  This avoids loading the 134 KB WOFF2 font and the 80 KB bootstrap-icons CSS.
+
+  Params:
+    name:   Icon name without prefix (e.g., "whatsapp", "calendar3", "gift")
+    class:  CSS classes to apply to the svg (e.g., "bi bi-whatsapp me-2")
+    size:   Optional width/height in pixels or CSS units (defaults to current font-size or 1em)
+*/ -}}
+{{- $name := .name -}}
+{{- $class := .class | default (printf "bi bi-%s" $name) -}}
+{{- $svgPath := printf "node_modules/bootstrap-icons/icons/%s.svg" $name -}}
+{{- $svg := resources.Get $svgPath -}}
+{{- if $svg -}}
+  {{- $raw := $svg.Content -}}
+  {{- /* Replace default attributes to support custom class and styling */ -}}
+  {{- $withClass := replaceRE `class="[^"]*"` (printf `class="%s"` $class) $raw -}}
+  {{- $withA11y := replaceRE `<svg ` `<svg aria-hidden="true" ` $withClass -}}
+  {{- $withA11y | safeHTML -}}
+{{- else -}}
+  <!-- Icon not found: {{ $name }} -->
+{{- end -}}

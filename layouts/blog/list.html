@@ -19,7 +19,7 @@ $paginator.Pages }}
       <p class="text-muted small mb-2">
         <span>{{ .Date.Format "Jan 2, 2006" }}</span>
         <span>·</span>
-        <span><i class="bi bi-clock me-1" aria-hidden="true"></i>{{ printf (i18n "blog.reading_time") .ReadingTime }}</span>
+        <span>{{ partial "icon.html" (dict "name" "clock" "class" "bi bi-clock me-1") }}{{ printf (i18n "blog.reading_time") .ReadingTime }}</span>
       </p>
 
       <p>{{ .Summary }}</p>

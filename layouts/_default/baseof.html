@@ -22,19 +22,6 @@
     <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
     {{ end }}
 
-    {{- /*
-      Bootstrap Icons.
-      The upstream CSS points at "./fonts/..." relative to its own folder.
-      The font files themselves live in static/fonts/, so the url() paths are
-      rewritten to the site root before minifying. A literal string replace is
-      used deliberately to avoid regex-escaping surprises in the template.
-    */ -}}
-    {{ $iconsRaw := resources.Get "node_modules/bootstrap-icons/font/bootstrap-icons.css" }}
-    {{ $iconsFixed := strings.Replace $iconsRaw.Content "./fonts/" "/fonts/" }}
-    {{ $icons := $iconsFixed | resources.FromString "css/bootstrap-icons.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $icons.RelPermalink }}" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="{{ $icons.RelPermalink }}" /></noscript>
-
     {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 

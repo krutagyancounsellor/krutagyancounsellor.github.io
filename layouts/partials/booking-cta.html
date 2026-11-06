@@ -36,6 +36,6 @@
   rel="noopener noreferrer"
   aria-label="{{ $label }} — {{ i18n "aria.booking_cta" }}"
 >
-  <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+  {{ partial "icon.html" (dict "name" "whatsapp" "class" "bi bi-whatsapp me-2") }}
   {{ $label }}
 </a>

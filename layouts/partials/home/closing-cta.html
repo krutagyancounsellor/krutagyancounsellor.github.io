@@ -20,7 +20,7 @@
         {{- /* Offer note — removed automatically when the offer is turned off. */ -}}
         {{ if $on }}
         <p class="text-muted small mt-3 mb-0">
-          <i class="bi bi-gift me-1" aria-hidden="true"></i>
+          {{ partial "icon.html" (dict "name" "gift" "class" "bi bi-gift me-1") }}
           {{ i18n "offer.final_note" }}
         </p>
         {{ end }}

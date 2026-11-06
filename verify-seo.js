@@ -197,7 +197,7 @@ if (!heroIgAnchor) {
 // The footer icon must link to the same URL. The Bootstrap icon sits inside
 // the anchor, so match the anchor that immediately precedes a `bi-instagram`
 // element.
-const footerIgAnchor = (home.match(/<a\b[^>]*>(?:<(?!\/a)[^>]*>)*<i[^>]*bi-instagram/i) || [])[0] || "";
+const footerIgAnchor = (home.slice(home.indexOf("<footer")).match(/<a\b[^>]*>(?:<(?!\/a)[^>]*>)*(?:<i|<svg)[^>]*bi-instagram/i) || [])[0] || "";
 if (!footerIgAnchor) {
   problems.push("footer is missing the Instagram icon link");
 } else if (!new RegExp(igHref).test(footerIgAnchor)) {

@@ -33,6 +33,6 @@
   rel="noopener noreferrer"
   aria-label="{{ $label }} — {{ i18n "aria.instagram" }}"
 >
-  <i class="bi bi-instagram me-2" aria-hidden="true"></i>
+  {{ partial "icon.html" (dict "name" "instagram" "class" "bi bi-instagram me-2") }}
   {{ $label }}
 </a>

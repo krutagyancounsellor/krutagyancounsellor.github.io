@@ -10,21 +10,21 @@
         <h2 class="h5 text-white mb-2">Get in touch</h2>
         <ul class="list-unstyled mb-0 d-flex flex-column flex-sm-row gap-sm-4 small">
           <li>
-            <i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>
+            {{ partial "icon.html" (dict "name" "envelope-fill" "class" "bi bi-envelope-fill me-2") }}
             <a class="link-light" href="mailto:{{ .Site.Params.email }}"
               aria-label="Email us at {{ .Site.Params.email }}">
               {{ .Site.Params.email }}
             </a>
           </li>
           <!-- <li>
-            <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>
+            {{ partial "icon.html" (dict "name" "telephone-fill" "class" "bi bi-telephone-fill me-2") }}
             <a class="link-light" href="tel:{{ .Site.Params.whatsapp }}"
               aria-label="Call us on {{ .Site.Params.phone }}">
               {{ .Site.Params.phone }}
             </a>
           </li> -->
           <li>
-            <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+            {{ partial "icon.html" (dict "name" "whatsapp" "class" "bi bi-whatsapp me-2") }}
             <a class="link-light" href="{{ $waURL }}" target="_blank" rel="noopener noreferrer"
               aria-label="Book a counselling session on WhatsApp">{{ .Site.Params.phone }}</a>
           </li>
@@ -62,14 +62,14 @@
             <a class="link-light fs-5" href="{{ .Site.Params.instagram.url }}" target="_blank" rel="me noopener noreferrer"
               aria-label="Instagram ({{ .Site.Params.instagram.handle }}) — opens in a new tab"
               title="Instagram {{ .Site.Params.instagram.handle }}">
-              <i class="bi bi-instagram" aria-hidden="true"></i>
+              {{ partial "icon.html" (dict "name" "instagram" "class" "bi bi-instagram") }}
             </a>
           </li>
           {{ range .Site.Params.socials }}
           <li>
             <a class="link-light fs-5" href="{{ .url }}" target="_blank" rel="me noopener noreferrer"
               aria-label="{{ .name }} — opens in a new tab" title="{{ .name }}">
-              <i class="bi {{ .icon }}" aria-hidden="true"></i>
+              {{ $iconName := strings.TrimPrefix "bi-" .icon }}{{ partial "icon.html" (dict "name" $iconName "class" (printf "bi %s" .icon)) }}
             </a>
           </li>
           {{ end }}
