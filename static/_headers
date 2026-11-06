@@ -1,11 +1,35 @@
 /*
-  /* Cache images and fonts for 1 year */
-*.webp   max-age=31536000, public, immutable
-/*.jpg    max-age=31536000, public, immutable
-/*.jpeg   max-age=31536000, public, immutable
-/*.png    max-age=31536000, public, immutable
-/*.webp   max-age=31536000, public, immutable
-/*.woff2  max-age=31536000, public, immutable
-/*.svg    max-age=31536000, public, immutable
-/*.ttf    max-age=31536000, public, immutable
-*/
+  Cache-Control: max-age=0, must-revalidate
+
+/scss/*
+  Cache-Control: max-age=31536000, public, immutable
+
+/css/*
+  Cache-Control: max-age=31536000, public, immutable
+
+/images/*
+  Cache-Control: max-age=31536000, public, immutable
+
+/fonts/*
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.webp
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.jpg
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.jpeg
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.png
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.woff2
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.svg
+  Cache-Control: max-age=31536000, public, immutable
+
+/*.js
+  Cache-Control: max-age=31536000, public, immutable
