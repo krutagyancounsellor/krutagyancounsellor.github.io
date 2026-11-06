@@ -32,10 +32,10 @@
     {{ $iconsRaw := resources.Get "node_modules/bootstrap-icons/font/bootstrap-icons.css" }}
     {{ $iconsFixed := strings.Replace $iconsRaw.Content "./fonts/" "/fonts/" }}
     {{ $icons := $iconsFixed | resources.FromString "css/bootstrap-icons.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $icons.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $icons.RelPermalink }}" media="print" onload="this.media='all'" />
 
     {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="print" onload="this.media='all'" />
 
     {{- /* JSON-LD structured data */ -}}
     {{ partial "structured-data.html" . }}

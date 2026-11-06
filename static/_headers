@@ -1,0 +1,11 @@
+/*
+  /* Cache images and fonts for 1 year */
+*.webp   max-age=31536000, public, immutable
+/*.jpg    max-age=31536000, public, immutable
+/*.jpeg   max-age=31536000, public, immutable
+/*.png    max-age=31536000, public, immutable
+/*.webp   max-age=31536000, public, immutable
+/*.woff2  max-age=31536000, public, immutable
+/*.svg    max-age=31536000, public, immutable
+/*.ttf    max-age=31536000, public, immutable
+*/
